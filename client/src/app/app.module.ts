@@ -1,4 +1,4 @@
-import { HomeModule } from './components/home/home.module';
+import { MainModule } from './components/main/main.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +21,7 @@ import { ROUTING } from "./app.routes";
         ROUTING,
 
         //Custom modules
-        HomeModule
+        MainModule
     ],
     providers: [],
     bootstrap: [AppComponent]
