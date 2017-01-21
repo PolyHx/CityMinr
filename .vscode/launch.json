@@ -8,7 +8,10 @@
             "type": "node",
             "request": "launch",
             "env": {
-                "NODE_ENV": "local"
+                "NODE_ENV": "local",
+                "DB_NAME": "ds117899.mlab.com:17899/cityminr_conu",
+                "DB_USERNAME": "lassondehacks",
+                "DB_PASSWORD": "conu2017"
             },
             "name": "Launch Program",
             "program": "${workspaceRoot}/server/build/bin/http.js",

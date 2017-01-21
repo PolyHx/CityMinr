@@ -4,6 +4,7 @@ import * as path from "path";
 import * as logger from "morgan";
 import * as cors from "cors";
 
+import { initialize } from "./models/database";
 import { Info } from "./route/info";
 
 export class Server {
@@ -13,6 +14,7 @@ export class Server {
         this.app = express();
         this.config();
         this.routes();
+        initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
         console.log("Started server v" + process.env.VERSION + " in " + process.env.NODE_ENV + " mode! Listening on port " + process.env.PORT + ".");
     }
 
