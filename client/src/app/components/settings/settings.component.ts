@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { DataSource } from '../../domain/datasources.model';
-import { DataSourcesServices } from '../../services/datasources.service';
+import { DataSource } from '../../domain/datasource.model';
+import { DataSourceService } from '../../services/datasource.service';
 
 @Component({
     selector: 'settings',
@@ -17,7 +17,7 @@ export class SettingsComponent {
 
     
 
-    constructor(private dataService: DataSourcesServices) {
+    constructor(private dataService: DataSourceService) {
         this.init();
     }
 

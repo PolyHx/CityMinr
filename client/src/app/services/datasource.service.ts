@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { DataSource } from "../domain/datasources.model";
+import { DataSource } from "../domain/datasource.model";
 
 const datasrcs: DataSource[] = [
     {
@@ -15,7 +15,7 @@ const datasrcs: DataSource[] = [
 
 
 @Injectable()
-export class DataSourcesServices {
+export class DataSourceService {
 
     getDataSources(): Promise<DataSource[]> {
         return new Promise((resolve, reject) => {
