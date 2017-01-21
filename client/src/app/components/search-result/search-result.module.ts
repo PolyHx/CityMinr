@@ -1,3 +1,4 @@
+import { ResourceModule } from '../resource/resource.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +12,8 @@ import { SearchResultComponent } from './search-result.component';
     imports: [
         BrowserModule,
         FormsModule,
-        ClarityModule
+        ClarityModule,
+        ResourceModule
     ],
     exports: [
         SearchResultComponent

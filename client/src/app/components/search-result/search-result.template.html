@@ -2,22 +2,21 @@
 	<div class="col-sm-12 search-result-row">
 		<div class="card">
 			<div class="card-header">
-				<a class="nav-link nav-icon cart-icon" href="javascript://" (click)="toggleCart()">
-					<clr-icon shape="plus" [@cartState]="cartState" size="22"></clr-icon>
-				</a>
 				<span>
 					Header
 				</span>
 				<a class="nav-link nav-icon" href="javascript://">
 					<clr-icon shape="caret" [@caretState]="open" size="22" class="pull-right" (click)="openDropdown()"></clr-icon>
 				</a>
+				<span class="pull-right label {{ labelService.getClassForFileType('JSON') }}">JSON</span>
+				<span class="pull-right label {{ labelService.getClassForFileType('CSV') }}">CSV</span>
+				<span class="pull-right label {{ labelService.getClassForFileType('PDF') }}">PDF</span>
+				<span class="pull-right label {{ labelService.getClassForFileType('XML') }}">XML</span>
+				<span class="pull-right label {{ labelService.getClassForFileType('DOCX') }}">DOCX</span>
 			</div>
 		</div>
 	</div>
 	<div class="card card-dropdown" *ngIf="open == 'open'">
-		<div class="card-header button-header">
-			<a class="btn btn-sm col-sm-2 offset-sm-10">Preview</a>
-		</div>
 		<div class="card-block">
 			<div class="card-title">
 			</div>
@@ -25,8 +24,8 @@
 				...
 			</div>
 		</div>
-		<div class="card-footer">
-			<button class="btn btn-sm">Download</button>
+		<div class="card-block">
+			<resource [resource]="resource"></resource>
 		</div>
 	</div>
 </div>

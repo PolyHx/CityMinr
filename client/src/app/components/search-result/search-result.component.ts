@@ -1,3 +1,4 @@
+import { LabelService } from '../../services/label.service';
 import { Component, trigger, state, style, transition, animate } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,27 +15,20 @@ import { Router } from '@angular/router';
             })),
             transition('open => closed', animate('100ms ease-in')),
             transition('closed => open', animate('100ms ease-out'))
-        ]),
-        trigger('cartState', [
-            state("inCart", style({
-                transform: 'rotate(45deg)',
-                color: '#ff0000'
-            })),
-            state('notInCart', style({
-                transform: 'rotate(0deg)',
-                color: '#007cbb'
-            })),
-            transition('inCart => notInCart', animate('100ms ease-in')),
-            transition('notInCart => inCart', animate('100ms ease-out'))
         ])
     ]
 })
 export class SearchResultComponent {
     private open: string = "closed";
 
-    private cartState: string = "notInCart";
+    private resource: any = {
+        description: "Organigramme-cdn-ndg-2014",
+        name: "Organigramme-cdn-ndg-2014",
+        format: "PDF",
+        url: "http://google.com"
+    }
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private labelService: LabelService) {
     }
 
     openDropdown() {
@@ -43,21 +37,5 @@ export class SearchResultComponent {
         } else {
             this.open = "open";
         }
-    }
-
-    toggleCart() {
-        if(this.cartState === "inCart"){
-            this.removeFromCart();
-        } else {
-            this.addToCart();
-        }
-    }
-
-    addToCart() {
-        this.cartState = "inCart";
-    }
-
-    removeFromCart()  {
-        this.cartState = "notInCart";
     }
 }

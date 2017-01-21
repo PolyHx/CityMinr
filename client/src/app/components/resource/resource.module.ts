@@ -1,22 +1,22 @@
-import { SearchResultModule } from '../search-result/search-result.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from 'clarity-angular';
-import { MainComponent } from './main.component';
-import { CartModule } from '../cart/cart.module';
+import { ResourceComponent } from './resource.component';
 
 @NgModule({
     declarations: [
-        MainComponent
+        ResourceComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        SearchResultModule,
-        CartModule
+        ClarityModule
+    ],
+    exports: [
+        ResourceComponent
     ],
     providers: []
 })
-export class MainModule {
+export class ResourceModule {
 }
