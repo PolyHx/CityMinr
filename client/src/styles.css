@@ -88,3 +88,21 @@
     background: white;
     border-top: 1px solid #e7eaec;
 }
+
+.modal-body {
+    color: black!important;
+}
+
+.separator {
+    width: 1px;
+    height: 100%;
+    border-right: 1px solid #555555;
+}
+
+.no-style {
+    list-style: none;
+}
+
+.control {
+    display: inline-block;
+}
