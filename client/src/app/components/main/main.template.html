@@ -1,5 +1,6 @@
-<search-result>
-</search-result>
-<search-result></search-result>
-<search-result></search-result>
+<div *ngFor="let res of searchResults; let i = index; trackBy: i">
+    <search-result
+        [result]="res"
+    ></search-result>
+</div>
 <cart></cart>

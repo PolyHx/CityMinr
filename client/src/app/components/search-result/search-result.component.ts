@@ -1,6 +1,7 @@
 import { LabelService } from '../../services/label.service';
-import { Component, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, trigger, state, style, transition, animate, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { SearchResult } from '../../domain/search-result.model';
 
 @Component({
     selector: 'search-result',
@@ -21,12 +22,8 @@ import { Router } from '@angular/router';
 export class SearchResultComponent {
     private open: string = "closed";
 
-    private resource: any = {
-        description: "Organigramme-cdn-ndg-2014",
-        name: "Organigramme-cdn-ndg-2014",
-        format: "PDF",
-        url: "http://google.com"
-    }
+    @Input("result") result: SearchResult;
+
 
     constructor(private router: Router, private labelService: LabelService) {
     }
