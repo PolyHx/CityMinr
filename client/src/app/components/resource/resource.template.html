@@ -1,0 +1,13 @@
+<a class="nav-link nav-icon cart-icon" href="javascript://" (click)="toggleCart()">
+	<clr-icon shape="plus" [@cartState]="cartState" size="22"></clr-icon>
+</a>
+<span>
+    {{ resource?.name }}
+</span>
+<a class="nav-link nav-icon" href="{{ resource?.url }}">
+	<clr-icon shape="download" size="22" class="pull-right spaced-button"></clr-icon>
+</a>
+<a class="nav-link nav-icon" href="javascript://">
+	<clr-icon shape="analytics" size="22" class="pull-right spaced-button"></clr-icon>
+</a>
+<span class="pull-right label {{ labelService.getClassForFileType(resource?.format) }}">{{ resource?.format }}</span>

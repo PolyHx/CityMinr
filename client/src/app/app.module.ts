@@ -1,3 +1,4 @@
+import { LabelService } from './services/label.service';
 import { MainModule } from './components/main/main.module';
 import { SettingsModule } from './components/settings/settings.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,7 +27,10 @@ import { DataSourcesServices } from './services/datasources.service';
         MainModule,
         SettingsModule
     ],
-    providers: [DataSourcesServices],
+    providers: [
+        DataSourcesServices,
+        LabelService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
