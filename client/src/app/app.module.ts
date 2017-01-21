@@ -1,6 +1,7 @@
+import { LoginModule } from './components/login/login.module';
 import { LabelService } from './services/label.service';
 import { MainModule } from './components/main/main.module';
-import { SettingsModule } from './components/settings/settings.module';
+import { DashboardModule } from './components/dashboard/dashboard.module';
 import { CartModule } from './components/cart/cart.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -26,9 +27,8 @@ import { SearchService } from './services/search.service';
         ROUTING,
 
         //Custom modules
-        MainModule,
-        SettingsModule,
-        CartModule
+        LoginModule,
+        DashboardModule
 
     ],
     providers: [DataSourceService, SearchService, LabelService],
