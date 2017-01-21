@@ -1,0 +1,28 @@
+<a class="nav-link nav-icon" href="javascript://">
+    <clr-icon shape="cog" class="is-inverse" (click)="opened = true"></clr-icon>
+</a>
+
+<!--MODAL-->
+
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'lg'">
+    <h3 class="modal-title">Search Settings</h3>
+
+    <div class="modal-body row">
+        <div class="col-sm-3 offset-sm-2 separator">
+            <ul *ngFor="let datasource of datasources; let i = index; trackBy: i">
+                <control [id]="i" [name]="datasource.name" [class]="'toggle-switch control'" [selected]="true">
+                </control>
+            </ul>
+        </div>
+        <div class="col-sm-6 row">
+            <ul *ngFor="let format of dataformats; let i = index; trackBy: i" class="col-sm-3">
+                <control [id]="i" [name]="format" [class]="'checkbox control'" [selected]="true">
+                </control>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="opened = false">Close</button>
+    </div>
+</clr-modal>

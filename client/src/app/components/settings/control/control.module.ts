@@ -2,17 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from 'clarity-angular';
-import { HomeComponent } from './home.component';
+import { ControlComponent } from './control.component';
 
 @NgModule({
     declarations: [
-        HomeComponent
+        ControlComponent
     ],
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+
+        ClarityModule
     ],
-    providers: []
+    exports: [ControlComponent]
 })
-export class HomeModule {
+export class ControlModule {
+
 }
