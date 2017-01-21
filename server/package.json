@@ -1,0 +1,41 @@
+{
+  "name": "cityminr",
+  "version": "0.0.1",
+  "description": "cityninr",
+  "scripts": {
+    "start": "grunt && node build/bin/http.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LassondeHacks/LassondeHacksBot.git"
+  },
+  "keywords": [
+    "cityninr"
+  ],
+  "author": "Julien Dufresne, Richer Archambault",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LassondeHacks/LassondeHacksBot/issues"
+  },
+  "homepage": "https://github.com/LassondeHacks/LassondeHacksBot#readme",
+  "dependencies": {
+    "@types/cors": "^2.8.0",
+    "@types/express": "^4.0.34",
+    "@types/form-data": "0.0.33",
+    "@types/grunt": "^0.4.20",
+    "@types/morgan": "^1.7.32",
+    "@types/node": "^6.0.54",
+    "@types/node-wit": "^4.2.0",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-ts": "^5.5.1",
+    "grunt-tslint": "^3.3.0",
+    "morgan": "^1.7.0",
+    "tslint": "^3.15.1",
+    "typescript": "^2.1.4"
+  }
+}
