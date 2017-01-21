@@ -9,6 +9,7 @@ import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
 import { ROUTING } from "./app.routes";
 import { DataSourceService } from './services/datasource.service';
+import { SearchService } from './services/search.service';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,7 @@ import { DataSourceService } from './services/datasource.service';
         CartModule
 
     ],
-    providers: [DataSourceService],
+    providers: [DataSourceService, SearchService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
