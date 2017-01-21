@@ -39,5 +39,8 @@
     "morgan": "^1.7.0",
     "tslint": "^3.15.1",
     "typescript": "^2.1.4"
+  },
+  "devDependencies": {
+    "grunt-contrib-copy": "^1.0.0"
   }
 }

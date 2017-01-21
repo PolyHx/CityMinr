@@ -6,6 +6,7 @@ import * as cors from "cors";
 
 import { initialize } from "./models/database";
 import { Info } from "./route/info";
+import { Index } from "./route/index";
 
 export class Server {
     public app: express.Application;
@@ -43,7 +44,9 @@ export class Server {
 
     private routes() {
         let info: Info = new Info();
+        let index: Index = new Index();
 
+        this.app.use("/", index.router);
         this.app.use("/info", info.router);
     }
 }
