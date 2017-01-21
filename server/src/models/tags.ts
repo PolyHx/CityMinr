@@ -1,10 +1,10 @@
 import * as mongoose from 'mongoose';
 import { RepositoryBase } from './database';
 export let Schema = mongoose.Schema;
-export let ObjectId = mongoose.ObjectId;
-export let Mixed = mongoose.Mixed;
+export let ObjectId = mongoose.Schema.Types.ObjectId;
+export let Mixed = mongoose.Schema.Types.Mixed;
 
-export interface ITagModel extends mongoose.Documents {
+export interface ITagModel extends mongoose.Document {
 
     ids: string[];
     name: string;
@@ -41,7 +41,7 @@ let schema = new Schema({
     }
     next();
     return this;
-})
+});
 
 export let TagSchema = mongoose.model<ITagModel>("tag", schema, "tags", true);
 

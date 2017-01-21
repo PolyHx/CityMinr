@@ -4,7 +4,7 @@ import { SearchResult } from '../../domain/search-result.model';
 import { SearchService } from '../../services/search.service';
 
 @Component({
-    selector: 'main',
+    selector: 'main-component',
     templateUrl: './main.template.html'
 })
 export class MainComponent {
