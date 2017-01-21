@@ -31,7 +31,7 @@ import { SearchService } from './services/search.service';
         CartModule
 
     ],
-    providers: [DataSourceService, SearchService],
+    providers: [DataSourceService, SearchService, LabelService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
