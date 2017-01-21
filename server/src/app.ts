@@ -7,6 +7,7 @@ import * as cors from "cors";
 import { initialize } from "./models/database";
 import { Info } from "./route/info";
 import { Index } from "./route/index";
+import { CityData } from "./controller/citydata";
 
 export class Server {
     public app: express.Application;
@@ -17,6 +18,7 @@ export class Server {
         this.routes();
         initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
         console.log("Started server v" + process.env.VERSION + " in " + process.env.NODE_ENV + " mode! Listening on port " + process.env.PORT + ".");
+        this.crawl();
     }
 
     private config() {
@@ -48,5 +50,10 @@ export class Server {
 
         this.app.use("/", index.router);
         this.app.use("/info", info.router);
+    }
+
+    private crawl() {
+        let controller: CityData = new CityData();
+        controller.crawlData();
     }
 }
