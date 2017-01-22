@@ -8,6 +8,7 @@ import { SettingService } from './setting.service';
 export class SearchService {
 
     private lastQuery: string = '';
+    private lastResult: SearchResult[];
 
     constructor(private settingService: SettingService) {
 
@@ -105,8 +106,24 @@ export class SearchService {
 
                     }
                 }
+                self.lastResult = result;
                 resolve(result);
             });
         });
+    }
+
+    async getPrediction(cartItems: ResourceResult[]) {
+        for (let i = 0; i< 50; i++) {
+
+            let j = Math.floor((Math.random() * this.lastResult.length) + 1);
+
+            for (let item of cartItems) {
+                if(item.id === this.lastResult[j].id) {
+                    continue;
+                }
+            }
+            return this.lastResult[j];
+        }
+
     }
 }
