@@ -1,6 +1,7 @@
 import { LabelService } from '../../services/label.service';
 import { Component, Input, Output, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResourceResult } from '../../domain/search-result.model';
 
 @Component({
     selector: 'resource',
@@ -22,6 +23,10 @@ import { Router } from '@angular/router';
 })
 export class ResourceComponent {
     @Input("resource") resource
+
+    @Input() cartItems: ResourceResult[];
+    @Output() cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+
     private cartState: string = "notInCart";
 
     constructor(private router: Router, private labelService: LabelService) {
@@ -37,9 +42,22 @@ export class ResourceComponent {
 
     addToCart() {
         this.cartState = "inCart";
+        if (!this.cartItems) {
+            this.cartItems = [];
+        }
+        this.cartItems.push(this.resource);
+        this.cartItemsChange.emit(this.cartItems);
+        console.log('resource' + this.cartItems);
     }
 
     removeFromCart() {
         this.cartState = "notInCart";
+
+        var array = [2, 5, 9];
+        let index = this.cartItems.indexOf(this.resource);
+
+        if (index > -1) {
+            this.cartItems.splice(index, 1);
+        }   
     }
 }

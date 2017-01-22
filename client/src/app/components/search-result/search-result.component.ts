@@ -1,7 +1,7 @@
 import { LabelService } from '../../services/label.service';
-import { Component, trigger, state, style, transition, animate, Input } from '@angular/core';
+import { Component, trigger, state, style, transition, animate, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearchResult } from '../../domain/search-result.model';
+import { SearchResult, FormatInfo, ResourceResult } from '../../domain/search-result.model';
 
 @Component({
     selector: 'search-result',
@@ -24,8 +24,17 @@ export class SearchResultComponent {
 
     @Input("result") result: SearchResult;
 
+    @Input() cartItems : ResourceResult[];
+    @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+
 
     constructor(private router: Router, private labelService: LabelService) {
+    }
+
+    updateCart(result : ResourceResult[]) {
+        console.log('search' + result);
+        this.cartItems = result;
+        this.cartItemsChange.emit(result);
     }
 
     openDropdown() {

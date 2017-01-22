@@ -1,5 +1,19 @@
 <div class="footer">
-	<div>
+	<a class="pull-right btn btn-sm" *ngIf="state == 'expanded'" (click)="toogleView()" href="javascript://">
+		Generate Snippet
+	</a>
+	<a class="pull-right btn btn-sm" *ngIf="state == 'collapsed'" (click)="toogleView()" href="javascript://">
+		Close
+	</a>
+
+	<div class="footer-view" [@openClose]="state" >
+		<div class="row view">
+			<div class="col-sm-3 separator view">
 		
+		</div>
+		<div class="col-sm-9 view">
+		
+		</div>
+		</div>
 	</div>
 </div>

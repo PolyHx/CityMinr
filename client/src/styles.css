@@ -110,3 +110,11 @@
 .spaced-button {
     margin: 0 5px;
 }
+
+.footer-view {
+    height: 0px;
+}
+
+.view{
+    min-height: inherit;
+}

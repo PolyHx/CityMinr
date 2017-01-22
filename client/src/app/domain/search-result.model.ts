@@ -1,10 +1,15 @@
+export interface FormatInfo {
+    format: string;
+    count: number;
+}
+
 export interface ResourceResult {
-    description?: string;
-    name?: string;
-    format?: string;
-    url?: string;
-    id?: string;
-    size?: number;
+    description: string;
+    name: string;
+    format: string;
+    url: string;
+    id: string;
+    size: number;
 }
 
 export interface SearchResult {
@@ -15,5 +20,5 @@ export interface SearchResult {
     methodologie: string;
     groups: string[];
     title: string;
-    formats: string[];
+    formats: FormatInfo[];
 }
