@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 export class LabelService {
 
     getClassForFileType(type: string) {
+        type = type.toUpperCase();
          if (["ODT", "RTF", "DOC", "DOCX"].indexOf(type) >= 0) {
             return "label-info";
         } else if (["XLSX", "XLS", "CSV", "TSV", "SHP"].indexOf(type) >= 0) {
