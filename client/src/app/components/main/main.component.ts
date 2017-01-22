@@ -23,7 +23,6 @@ export class MainComponent {
 
     updateCart(result : ResourceResult[]) {
         this.cartItemsMain = result;
-        console.log(this.cartItemsMain);
     }
 
 
