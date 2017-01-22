@@ -31,6 +31,17 @@ module Controller {
             let resource = await this.repo.findOne({id: id});
             return resource;
         }
+
+        public async getByIds(ids: string[]): Promise<IResourceModel[]> {
+            let resources: IResourceModel[] = [];
+            for (let id of ids) {
+                let resource = await this.repo.findOne({id: id});
+                if (resource) {
+                    resources.push(resource);
+                }
+            }
+            return resources;
+        }
     }
 }
 export = Controller;

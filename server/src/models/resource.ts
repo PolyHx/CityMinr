@@ -55,6 +55,7 @@ let schema = new Schema({
         if (!doc.createdAt) {
             doc.createdAt = now;
         }
+        doc._id = doc.id;
         doc.modifiedAt = now;
     }
     next();

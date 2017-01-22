@@ -17,10 +17,10 @@ let schema = new Schema({
         type: String,
         required: true
     },
-    resources: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "resource" 
-    }],
+    resources: {
+        type: [String],
+        required: false
+    },
     createdAt: {
         type: Date,
         required: false
