@@ -66,7 +66,7 @@ module Controller {
 
                         for (let res of pack.resources) {
 
-                            if (formats.find(test, res.format.toLowerCase())) {
+                            if (formats.find(test, res.format.toUpperCase())) {
                                 result.push(pack);
                                 break;
                             }

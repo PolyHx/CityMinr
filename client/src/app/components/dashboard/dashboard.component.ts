@@ -3,6 +3,8 @@ import { GoogleProfile } from '../../domain/google-profile.model';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from "../../services/login.service";
+import { SearchService } from '../../services/search.service';
+import { FormsModule } from '@angular/forms';
 
 declare var gapi: any;
 
@@ -14,9 +16,14 @@ export class DashboardComponent implements AfterViewInit {
     @ViewChild("main") main;
     private activeUser: GoogleProfile;
 
-    private history: any[];
+    private loading: boolean = false;
 
-    constructor(private loginService: LoginService, private dataService: DataService, private router: Router) {
+    private history: any[];
+    constructor(private loginService: LoginService, private dataService: DataService, private router: Router, private searchService: SearchService) {
+    }
+
+    saveQuery(query:string){
+        this.searchService.save(query);
     }
 
     public auth2: any;
