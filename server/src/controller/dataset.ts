@@ -1,4 +1,3 @@
-import * as request from "request";
 import * as express from "express";
 import { IDatasetModel, DatasetRepository } from "../models/dataset";
 
@@ -17,8 +16,7 @@ module Controller {
 
             try {
                 this.repo.create(datasetModel);
-            }
-            catch (err) {
+            } catch (err) {
                 console.log(err);
             }
         }

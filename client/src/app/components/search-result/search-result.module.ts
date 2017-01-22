@@ -1,3 +1,4 @@
+import { VisualizeModalModule } from './visualize-modal/visualize-modal.module';
 import { ResourceModule } from '../resource/resource.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { SearchResultComponent } from './search-result.component';
         BrowserModule,
         FormsModule,
         ClarityModule,
-        ResourceModule
+        ResourceModule,
+        VisualizeModalModule
     ],
     exports: [
         SearchResultComponent

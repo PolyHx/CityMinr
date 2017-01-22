@@ -1,10 +1,10 @@
-import * as request from "request";
 import * as express from "express";
-import { IGroupModel, GroupRepository } from "../models/groups";
+import { IGroupModel, GroupRepository } from "../models/group";
 
 module Controller {
 
     export class Group {
+
         private repo: GroupRepository;
 
         constructor() {
@@ -16,8 +16,7 @@ module Controller {
             
             try {
                 this.repo.create(groupModel);
-            }
-            catch (err) {
+            } catch (err) {
                 console.log(err);
             }
         }
@@ -35,4 +34,4 @@ module Controller {
         }
     }
 }
-export = Controller
+export = Controller;

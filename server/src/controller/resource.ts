@@ -1,10 +1,9 @@
-import * as request from "request";
 import * as express from "express";
-import { IResourceModel, ResourceRepository } from "../models/ressources";
+import { IResourceModel, ResourceRepository } from "../models/resource";
 
 module Controller {
 
-    export class Package {
+    export class Resource {
 
         private repo: ResourceRepository;
 
@@ -17,8 +16,7 @@ module Controller {
             
             try {
                 this.repo.create(resourceModel);
-            }
-            catch (err) {
+            } catch (err) {
                 console.log(err);
             }
         }
@@ -30,10 +28,9 @@ module Controller {
         }
 
         public async getById(id: string): Promise<IResourceModel> {
-           
             let resource = await this.repo.findOne({id: id});
             return resource;
         }
     }
 }
-export = Controller
+export = Controller;

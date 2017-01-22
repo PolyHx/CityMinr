@@ -1,4 +1,3 @@
-import * as request from "request";
 import * as express from "express";
 import { IPackageModel, PackageRepository } from "../models/package";
 
@@ -17,8 +16,7 @@ module Controller {
             
             try {
                 this.repo.create(packageModel);
-            }
-            catch (err) {
+            } catch (err) {
                 console.log(err);
             }
         }
@@ -36,4 +34,4 @@ module Controller {
         }
     }
 }
-export = Controller
+export = Controller;
