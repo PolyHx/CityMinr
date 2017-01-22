@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {
+    "auth0-lock": "registry:dt/auth0-lock#10.9.0+20170110204944",
+    "jquery": "registry:dt/jquery#1.10.0+20170104155652"
+  }
+}

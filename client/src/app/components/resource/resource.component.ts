@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
     ]
 })
 export class ResourceComponent {
-    @Input("resource") resource
+    @Input("resource") resource;
     private cartState: string = "notInCart";
 
     constructor(private router: Router, private labelService: LabelService) {

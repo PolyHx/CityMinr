@@ -21,7 +21,7 @@ export class Server {
         this.app = express();
         this.config();
         this.routes();
-        initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
+        //initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
         console.log("Started server v" + process.env.VERSION + " in " + process.env.NODE_ENV + " mode! Listening on port " + process.env.PORT + ".");
         this.crawl();
     }
