@@ -8,11 +8,11 @@ export interface IPackageModel extends mongoose.Document {
 
     id: string;
     metadata_modified: string;
-    resources: string[];
-    language: string;
-    methodologie: string;
+    resources?: string[];
+    language?: string;
+    methodologie?: string;
     name: string;
-    title: string;
+    title?: string;
     createdAt?: Date;
     modifiedAt?: Date;
 }
@@ -29,22 +29,22 @@ let schema = new Schema({
     },
     resources: {
         type: [String],
-        required: true
+        required: false
     },
     language: {
         type: String,
-        required: true
+        required: false
     },
     methodologie: {
         type: String,
-        required: true
+        required: false
     },
     name: {
         type: String,
         required: true
     },title: {
         type: String,
-        required: true
+        required: false
     },
     createdAt: {
         type: Date,

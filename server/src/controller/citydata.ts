@@ -24,14 +24,14 @@ module Controller {
                         for (let result of response.result.results) {
                             let packtemp = await packageRepo.findOne({ id: result.id });
                             if (!packtemp) {
-                                packageRepo.create(<IPackageModel>{
+                                packtemp = await packageRepo.create(<IPackageModel>{
                                     id: result.id,
                                     metadata_modified: result.metadata_modified,
                                     language: result.language,
                                     methodologie: result.methodologie,
                                     name: result.name,
                                     title: result.title,
-                                    resources: []
+                                    resources: new Array<string>()
                                 });
                             }
                             for (let tag of result.tags) {
