@@ -1,20 +1,22 @@
 <div class="footer">
 	<div class="footer-header">
 		<span *ngIf="itemCount > 1">
-			{{itemCount}} Items
+			{{cartItems.length}} Items
 		</span>
 		<span *ngIf="itemCount <= 1">
-			{{itemCount}} Items
+			{{cartItems.length}} Item
 		</span>
 		<a class="pull-right btn btn-sm" *ngIf="state == 'expanded'" (click)="toogleView()" href="javascript://">Generate Snippet</a>
-		<a class="pull-right " *ngIf="state == 'collapsed'" (click)="toogleView()" href="javascript://"><clr-icon shape="close"></clr-icon></a>
+		<a class="pull-right " *ngIf="state == 'collapsed'" (click)="toogleView()" href="javascript://">
+			<clr-icon shape="close"></clr-icon>
+		</a>
 		<clr-dropdown class="pull-right" *ngIf="state == 'collapsed'" [clrMenuPosition]="'bottom-right'">
 			<a href="javascript://" class="btn btn-sm" clrDropdownToggle>
         		{{lang}}
         		<clr-icon shape="caret down"></clr-icon>
     		</a>
 			<div class="dropdown-menu">
-				<label class="dropdown-header">Laguages</label>
+				<label class="dropdown-header">Languages</label>
 				<a (click)="lang = 'javascript'; generateCode()" href="javascript://" clrDropdownItem>JavaScript</a>
 				<a (click)="lang = 'php'; generateCode()" href="javascript://" clrDropdownItem>PHP</a>
 				<a (click)="lang = 'nodejs'; generateCode()" href="javascript://" clrDropdownItem>NodeJS</a>
@@ -47,8 +49,9 @@
 					<code-viewer class="code" [(code)]="code" [readOnly]="'nocursor'"></code-viewer>
 				</div>
 			</div>
-
-
 		</div>
+	</div>
+	<div class="footer-header">
+		<prediction *ngIf="state != 'expanded'" [cartItems]="cartItems"></prediction>
 	</div>
 </div>

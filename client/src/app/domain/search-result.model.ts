@@ -4,12 +4,12 @@ export interface FormatInfo {
 }
 
 export interface ResourceResult {
-    description: string;
-    name: string;
-    format: string;
-    url: string;
-    id: string;
-    size: number;
+    description?: string;
+    name?: string;
+    format?: string;
+    url?: string;
+    id?: string;
+    size?: number;
 }
 
 export interface SearchResult {

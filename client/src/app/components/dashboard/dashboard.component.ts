@@ -1,5 +1,6 @@
+import { DataService } from '../../services/data.service';
 import { GoogleProfile } from '../../domain/google-profile.model';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from "../../services/login.service";
 
@@ -10,8 +11,12 @@ declare var gapi: any;
     templateUrl: './dashboard.template.html'
 })
 export class DashboardComponent implements AfterViewInit {
+    @ViewChild("main") main;
     private activeUser: GoogleProfile;
-    constructor(private loginService: LoginService, private router: Router) {
+
+    private history: any[];
+
+    constructor(private loginService: LoginService, private dataService: DataService, private router: Router) {
     }
 
     public auth2: any;
@@ -28,6 +33,18 @@ export class DashboardComponent implements AfterViewInit {
 
     async fetchActiveUser() {
         this.activeUser = await this.loginService.getActiveUser();
+        this.updateHistory();
+    }
+
+    async updateHistory() {
+        let result = await this.dataService.getHistory(this.activeUser.email);
+        this.history = result.histories.reverse();
+    }
+
+    clickHistory(history: any) {
+        this.dataService.getResources(history.resources).then((resources) => {
+            this.main.updateCart(resources.resources);
+        })
     }
 
     ngAfterViewInit() {

@@ -19,7 +19,7 @@
 	</clr-header>
 	<div class="content-container">
 		<div class="content-area">
-			<main-component></main-component>
+			<main-component #main (updateHistory)="updateHistory()"></main-component>
 		</div>
 		<nav class="sidenav">
 			<section class="sidenav-content">
@@ -47,12 +47,7 @@
 				<section class="nav-group">
 					<label for="tabexample2">History</label>
 					<ul class="nav-list">
-						<li><a class="nav-link">Link 1</a></li>
-						<li><a class="nav-link">Link 2</a></li>
-						<li><a class="nav-link">Link 3</a></li>
-						<li><a class="nav-link">Link 4</a></li>
-						<li><a class="nav-link">Link 5</a></li>
-						<li><a class="nav-link">Link 6</a></li>
+						<li *ngFor="let item of history"><a (click)="clickHistory(item)" class="nav-link">{{ item.createdAt | date: "yyyy/MM/dd H:mm" }}</a></li>
 					</ul>
 				</section>
 			</section>

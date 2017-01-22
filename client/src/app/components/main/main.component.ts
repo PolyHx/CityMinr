@@ -10,8 +10,9 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class MainComponent {
-
     @ViewChild('search') search;
+    @ViewChild('cart') cart;
+    @Output() updateHistory = new EventEmitter();
 
     private searchResults : SearchResult[];
 
@@ -23,8 +24,12 @@ export class MainComponent {
 
     updateCart(result : ResourceResult[]) {
         this.cartItemsMain = result;
+        this.cart.updateCart(result)
     }
 
+    onUpdateHistory() {
+        this.updateHistory.emit();
+    }
 
     async init() {
         this.searchResults = await this.searchService.search('cacamiel');

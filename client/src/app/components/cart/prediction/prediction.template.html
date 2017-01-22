@@ -1,0 +1,10 @@
+<div class="row prediction-container">
+	<div class="col-sm-7 prediction-text" *ngIf="cartItems.length > 0">
+		<label>Complete with the set <b>{{ currentPrediction?.name }}</b></label>
+		<span class="label {{ labelService.getClassForFileType(currentPrediction?.format) }}">{{ currentPrediction?.format }}</span><label>?</label>
+	</div>
+	<div class="col-sm-3 prediction-icons" *ngIf="cartItems.length > 0">
+		<clr-icon href="#" (click)="validatePrediction(currentPrediction.id)" shape="check" size="20" class="green-checkmark"></clr-icon>
+		<clr-icon href="#" (click)="rejectPrediction(currentPrediction.id)" shape="close" size="20" class="red-cross"></clr-icon>
+	</div>
+</div>
