@@ -42,7 +42,7 @@ var result: SearchResult[] = [{
             description: 'A nice resource 2',
             name: 'NiceRes2',
             format: 'geojson',
-            url: 'http://donnees.ville.montreal.qc.ca/dataset/00bd85eb-23aa-4669-8f1b-ba9a000e3dd8/resource/e9b0f927-8f75-458c-8fda-b5da65cc8b73/download/limadmin.json',
+            url: 'http://donnees.ville.montreal.qc.ca/dataset/584de76b-13b9-47ea-af12-0c37b8eb5de5/resource/7c521d09-7e84-4759-856e-b5a04b95330a/download/comptages.geojson',
             id: '0987654321',
             size: 36
         },

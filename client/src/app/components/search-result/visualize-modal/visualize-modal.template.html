@@ -5,6 +5,12 @@
 		<pre class="code-preview" *ngIf="!loading && resource?.format == 'json'">
 			<code clr-code-highlight="language-javascript">{{ resourceContent }}</code>
 		</pre>
+		<div class="col-sm-12 pdf-container" *ngIf="!loading && resource?.format == 'pdf'">
+			<embed [src]="resourceContent" width="100%" height="100%">
+		</div>
+		<div class="col-sm-12 map-container" *ngIf="resource?.format == 'geojson'">
+		</div>
+		<div #map id="map"></div>
 		<div class="spinner-container" *ngIf="loading">
 			<div class="spinner">
 			</div>
