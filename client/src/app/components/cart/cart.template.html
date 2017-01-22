@@ -52,6 +52,6 @@
 		</div>
 	</div>
 	<div class="footer-header">
-		<prediction *ngIf="state != 'expanded'" [cartItems]="cartItems"></prediction>
+		<prediction *ngIf="state != 'expanded' && cartItems" [cartItems]="cartItems"></prediction>
 	</div>
 </div>

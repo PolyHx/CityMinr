@@ -27,14 +27,9 @@ export class PredictionComponent implements DoCheck, AfterViewInit {
     }
 
     nextPrediction(): ResourceResult {
-        return {
-            id: "0",
-            name: "Stationnement 2016",
-            description: "blablablabla",
-            format: "JSON",
-            url: "http://google.com",
-            size: null
-        };
+        var pre =  this.searchService.getPrediction(this.cartItems);
+        console.log(pre);
+        return pre;            
     }
 
     validatePrediction(id: string) {

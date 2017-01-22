@@ -114,18 +114,17 @@ export class SearchService {
         });
     }
 
-    async getPrediction(cartItems: ResourceResult[]) {
-        for (let i = 0; i< 50; i++) {
+    getPrediction(cartItems: ResourceResult[]) {
 
-            let j = Math.floor((Math.random() * this.lastResult.length) + 1);
+        if (cartItems && this.lastResult) {
+            let j = Math.floor((Math.random() * this.lastResult.length));
 
-            for (let item of cartItems) {
-                if(item.id === this.lastResult[j].id) {
-                    continue;
-                }
-            }
-            return this.lastResult[j];
+            let k = Math.floor((Math.random() * this.lastResult[j].resources.length));
+
+            return this.lastResult[j].resources[k];
         }
+
+        return null;
 
     }
 }
