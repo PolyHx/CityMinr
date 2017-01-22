@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import { RepositoryBase } from './database';
-import { IResourceModel } from './ressources';
+import { IResourceModel } from './resource';
 export let Schema = mongoose.Schema;
 export let ObjectId = mongoose.Schema.Types.ObjectId;
 export let Mixed = mongoose.Schema.Types.Mixed;

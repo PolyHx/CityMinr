@@ -1,4 +1,3 @@
-import * as request from "request";
 import * as express from "express";
 import { IDatasetModel, DatasetRepository } from "../models/dataset";
 
@@ -11,6 +10,15 @@ module Controller {
         constructor() {
 
             this.repo = new DatasetRepository();
+        }
+
+        public async create(datasetModel: IDatasetModel) {
+
+            try {
+                this.repo.create(datasetModel);
+            } catch (err) {
+                console.log(err);
+            }
         }
 
         public async getAll(): Promise<IDatasetModel[]> {

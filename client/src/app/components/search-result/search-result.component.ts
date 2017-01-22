@@ -47,8 +47,8 @@ export class SearchResultComponent {
     }
 
     triggerVisualizeModal(resource: ResourceResult) {
-        this.visualizedResource = resource;
         this.visualizeModalOpen = true;
+        this.visualizedResource = resource;
     }
 
     updateVisualizeModalOpen(newValue: boolean) {

@@ -11,7 +11,7 @@ import { Index } from "./route/index";
 import { Search } from "./route/search";
 import * as DatasetRoute from "./route/dataset";
 
-import { CityData } from "./controller/citydata";
+import { CityData } from "./controller/city_data";
 import { Dataset } from "./controller/dataset";
 
 export class Server {

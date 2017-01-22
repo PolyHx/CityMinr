@@ -1,9 +1,9 @@
 import * as request from "request";
 import * as express from "express";
 import { PackageSearchResult } from "../models/city_data";
-import { ITagModel, TagRepository } from "../models/tags";
-import { IResourceModel, ResourceRepository } from "../models/ressources";
-import { IGroupModel, GroupRepository } from "../models/groups";
+import { ITagModel, TagRepository } from "../models/tag";
+import { IResourceModel, ResourceRepository } from "../models/resource";
+import { IGroupModel, GroupRepository } from "../models/group";
 import { IPackageModel, PackageRepository } from "../models/package";
 import { IDatasetModel } from "../models/dataset";
 

@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from 'clarity-angular';
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { VisualizeModalComponent } from './visualize-modal.component';
 
 @NgModule({
     declarations: [
-        VisualizeModalComponent
+        VisualizeModalComponent,
+        PdfViewerComponent
     ],
     imports: [
         BrowserModule,

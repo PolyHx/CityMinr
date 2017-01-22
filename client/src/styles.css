@@ -184,3 +184,11 @@ code-viewer > div{
 .footer-view .content-container{
     max-height: calc(100vh - 120px)!important;
 }
+.code-preview {
+    width: 100%;
+}
+
+.spinner-container{
+    width: 100%;
+    text-align: center;
+}
