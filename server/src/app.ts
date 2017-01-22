@@ -53,7 +53,7 @@ export class Server {
     }
 
     private crawl() {
-        let controller: CityData = new CityData();
-        controller.crawlData();
+        // let controller: CityData = new CityData();
+        // controller.crawlData();
     }
 }
