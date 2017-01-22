@@ -7,7 +7,7 @@
 <a class="nav-link nav-icon" href="{{ resource?.url }}">
 	<clr-icon shape="download" size="22" class="pull-right spaced-button"></clr-icon>
 </a>
-<a class="nav-link nav-icon" href="javascript://" *ngIf="resource?.format != 'json' || resource?.format != 'geojson' || resource?.format != 'pdf'">
+<a class="nav-link nav-icon" href="javascript://" *ngIf="resource?.format == 'JSON' || resource?.format == 'GEOJSON' || resource?.format == 'PDF'">
 	<clr-icon shape="analytics" size="22" class="pull-right spaced-button" (click)="clickVisualize()"></clr-icon>
 </a>
 <span class="pull-right label {{ labelService.getClassForFileType(resource?.format) }}">{{ resource?.format.toUpperCase() }}</span>

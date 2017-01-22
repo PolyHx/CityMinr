@@ -9,6 +9,7 @@ import { initialize } from "./models/database";
 import { Info } from "./route/info";
 import { Index } from "./route/index";
 import { Search } from "./route/search";
+import { History } from "./route/history";
 import * as DatasetRoute from "./route/dataset";
 
 import { CityData } from "./controller/city_data";
@@ -54,11 +55,13 @@ export class Server {
         let index: Index = new Index();
         let search: Search = new Search();
         let dataset: DatasetRoute.Dataset = new DatasetRoute.Dataset();
+        let history: History = new History();
 
         this.app.use("/", index.router);
         this.app.use("/search", search.router);
         this.app.use("/info", info.router);
         this.app.use("/dataset", dataset.router);
+        this.app.use("/history", history.router);
     }
 
     private async crawl() {

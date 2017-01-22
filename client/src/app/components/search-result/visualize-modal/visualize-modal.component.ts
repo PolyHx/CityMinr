@@ -47,7 +47,7 @@ export class VisualizeModalComponent implements DoCheck {
             if (this.resource != this.lastResource && this.resource) {
                 this.loading = true;
                 console.log("loading");
-                if (this.resource.format == "json") {
+                if (this.resource.format == "JSON") {
                     this.dataService.getDataFromUrl(this.resource.url).then((data: any) => {
                         this.resourceContent = this.formatJSON(data._body);
                         this.lastResource = this.resource;
@@ -56,11 +56,11 @@ export class VisualizeModalComponent implements DoCheck {
                         this.loading = false;
                         console.log(err);
                     });
-                } else if (this.resource.format == "pdf") {
+                } else if (this.resource.format == "PDF") {
                     this.resourceContent = this.sanitizer.bypassSecurityTrustResourceUrl(this.resource.url);
                     this.lastResource = this.resource;
                     this.loading = false;
-                } else if (this.resource.format == "geojson") {
+                } else if (this.resource.format == "GEOJSON") {
                     this.lastResource = this.resource;
                     this.loading = false;
                     var myLatlng = new google.maps.LatLng(45.445151, -73.645651);
