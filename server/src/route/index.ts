@@ -10,7 +10,7 @@ module Route {
         constructor() {
             this.router = express.Router();
 
-            this.router.get("/", this.index);
+            this.router.get("/", this.index.bind(this));
         }
 
         private index(req: express.Request, res: express.Response) {

@@ -9,7 +9,7 @@ module Route {
         constructor() {
             this.router = express.Router();
 
-            this.router.get("/", this.info);
+            this.router.get("/", this.info.bind(this));
         }
 
         private info(req: express.Request, res: express.Response) {

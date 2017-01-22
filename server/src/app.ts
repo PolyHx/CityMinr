@@ -9,6 +9,7 @@ import { initialize } from "./models/database";
 import { Info } from "./route/info";
 import { Index } from "./route/index";
 import { Search } from "./route/search";
+import * as DatasetRoute from "./route/dataset";
 
 import { CityData } from "./controller/citydata";
 import { Dataset } from "./controller/dataset";
@@ -52,19 +53,21 @@ export class Server {
         let info: Info = new Info();
         let index: Index = new Index();
         let search: Search = new Search();
+        let dataset: DatasetRoute.Dataset = new DatasetRoute.Dataset();
 
         this.app.use("/", index.router);
         this.app.use("/search", search.router);
         this.app.use("/info", info.router);
+        this.app.use("/dataset", dataset.router);
     }
 
     private async crawl() {
-        let controller: CityData = new CityData();
-        let datasetController: Dataset = new Dataset();
+        // let controller: CityData = new CityData();
+        // let datasetController: Dataset = new Dataset();
 
-        let datasets = await datasetController.getAll();
-        for (let dataset of datasets) {
-            controller.crawlData(dataset.url);
-        }
+        // let datasets = await datasetController.getAll();
+        // for (let dataset of datasets) {
+        //     controller.crawlData(dataset.url);
+        // }
     }
 }
