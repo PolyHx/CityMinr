@@ -27,18 +27,18 @@ export class CartComponent {
 
     private opened: Boolean = false;
     private itemCount: number = 0;
-    private code: string;
 
     @Input() cartItems : ResourceResult[];
     @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
 
+    private code: string = "{\n" +
+    "   id: 'caca2'\n" +
+    "   name: 'Quebec'\n" +
+    "}\n";
+
     constructor() {
         this.state = 'expanded';
         this.itemCount = 0;
-        this.code = `
-        @Input() cartItems : ResourceResult[];
-        @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
-        `;
     }
 
     toogleView() { 

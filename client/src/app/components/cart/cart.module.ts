@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClarityModule } from 'clarity-angular';
 import { CartComponent } from './cart.component';
+import { CodeViewerModule } from '../code-viewer/code-viewer.module';
 
 @NgModule({
     declarations: [
@@ -11,7 +12,7 @@ import { CartComponent } from './cart.component';
     imports: [
         BrowserModule,
         FormsModule,
-
+        CodeViewerModule,
         ClarityModule
     ],
     exports: [CartComponent]
