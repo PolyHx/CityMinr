@@ -4,11 +4,18 @@ import * as path from "path";
 import * as logger from "morgan";
 import * as cors from "cors";
 
+if (process.env.NODE_ENV === "local") {
+    process.env.DB_NAME = "ds117899.mlab.com:17899/cityminr_conu";
+    process.env.DB_USERNAME = "lassondehacks";
+    process.env.DB_PASSWORD = "conuCityMinr2017!";
+}
+
 import { initialize } from "./models/database";
 
 import { Info } from "./route/info";
 import { Index } from "./route/index";
 import { Search } from "./route/search";
+import { History } from "./route/history";
 import * as DatasetRoute from "./route/dataset";
 
 import { CityData } from "./controller/city_data";
@@ -54,20 +61,21 @@ export class Server {
         let index: Index = new Index();
         let search: Search = new Search();
         let dataset: DatasetRoute.Dataset = new DatasetRoute.Dataset();
+        let history: History = new History();
 
         this.app.use("/", index.router);
         this.app.use("/search", search.router);
         this.app.use("/info", info.router);
         this.app.use("/dataset", dataset.router);
+        this.app.use("/history", history.router);
     }
 
     private async crawl() {
         // let controller: CityData = new CityData();
         // let datasetController: Dataset = new Dataset();
-
         // let datasets = await datasetController.getAll();
         // for (let dataset of datasets) {
-        //     controller.crawlData(dataset);
+        //     await controller.crawlData(dataset);
         // }
     }
 }

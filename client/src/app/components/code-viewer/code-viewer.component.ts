@@ -26,10 +26,11 @@ export class CodeViewerComponent implements DoCheck {
             this.codeMirrorEditor = CodeMirror(function (elt) {
                 document.getElementById("code-editor").parentNode.replaceChild(elt, document.getElementById("code-editor"));
             }, {
-                    mode: this.mode,
+                    mode: 'text',
                     value: this.code,
                     readOnly: this.readOnly,
-                    lineNumbers: true
+                    lineNumbers: true,
+                    lineWrapping: true
                 });
             setTimeout(() => {
                 this.codeMirrorEditor.refresh();
@@ -41,6 +42,7 @@ export class CodeViewerComponent implements DoCheck {
     ngDoCheck() {
         if (this.code != this.lastCode && this.code && this.codeMirrorEditor) {
             this.codeMirrorEditor.setValue(this.code);
+            this.codeMirrorEditor.setOption('mode', this.mode);
             setTimeout(() => {
                 this.codeMirrorEditor.refresh();
             }, 100);
