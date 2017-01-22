@@ -62,11 +62,16 @@ export class CartComponent {
         }
 
         this.cartItemsChange.emit(this.cartItems);
+
+        this.generateCode();
     }
 
     updateCart(result:ResourceResult[]) {
         this.cartItems = result;
         this.itemCount = this.cartItems.length;
+
+
+        this.generateCode();
     }
 
     generateCode() {
@@ -82,10 +87,12 @@ export class CartComponent {
         } else {
             console.log('There was a problem with the request.');
         }
-    };
-    xhttp.open("GET", "` + this.cartItems[0].url + `", true);
-    xhttp.send();
-}`
+    };\n\t`;
+                    for (let source of this.cartItems) {
+                        this.code += `xhttp.open("GET", "` + source.url + `", true);
+    xhttp.send();\n\t`
+                    }
+                    this.code+='}';
                     break;
 
                 case 'php':
@@ -95,6 +102,15 @@ export class CartComponent {
                     break;
 
                 case 'ruby':
+                this.code = 'require "net/http"\nrequire "uri"\n\n';
+
+                for (let source of this.cartItems) {
+                        this.code += 'uri = URI.parse("' + source.url + '")\nhttp = Net::HTTP.new(uri.host, uri.port)\nresponse = http.request(Net::HTTP::Get.new(uri.request_uri))\nputs response.body';
+                    }
+                    break;
+
+                default:
+                    this.code = 'No language selected';
                     break;
 
             }
