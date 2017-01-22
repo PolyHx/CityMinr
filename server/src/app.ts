@@ -21,7 +21,7 @@ export class Server {
         this.app = express();
         this.config();
         this.routes();
-        //initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
+        initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
         console.log("Started server v" + process.env.VERSION + " in " + process.env.NODE_ENV + " mode! Listening on port " + process.env.PORT + ".");
         this.crawl();
     }
@@ -62,12 +62,12 @@ export class Server {
     }
 
     private async crawl() {
-         let controller: CityData = new CityData();
-         let datasetController: Dataset = new Dataset();
+        // let controller: CityData = new CityData();
+        // let datasetController: Dataset = new Dataset();
 
-         let datasets = await datasetController.getAll();
-         for (let dataset of datasets) {
-             controller.crawlData(dataset.url);
-         }
+        // let datasets = await datasetController.getAll();
+        // for (let dataset of datasets) {
+        //     controller.crawlData(dataset);
+        // }
     }
 }

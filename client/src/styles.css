@@ -52,7 +52,7 @@
 }
 
 .search-result-row {
-    z-index: 1;
+    z-index: 2;
 }
 
 .button-header {
@@ -158,4 +158,7 @@
 .footer-delete-item-btn{
     text-decoration: none;
     color: red;
+}
+.top-modal {
+    z-index: 100 !important;
 }

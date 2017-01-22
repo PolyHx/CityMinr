@@ -1,0 +1,11 @@
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'lg'" class="top-modal" *ngIf="open">
+	<h3 class="modal-title">Preview</h3>
+
+	<div class="modal-body row">
+        <code-viewer [code]="code" [mode]="'javascript'" [readOnly]="false"></code-viewer>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" (click)="close()">Close</button>
+	</div>
+</clr-modal>

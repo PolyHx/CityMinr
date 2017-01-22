@@ -1,11 +1,13 @@
 import * as mongoose from 'mongoose';
 import { RepositoryBase } from './database';
+import { IPackageModel } from './package';
 export let Schema = mongoose.Schema;
 export let ObjectId = mongoose.Schema.Types.ObjectId;
 export let Mixed = mongoose.Schema.Types.Mixed;
 
 export interface IGroupModel extends mongoose.Document {
     ids: string[];
+    packages: IPackageModel[];
     description: string;
     title: string;
     name: string;
@@ -18,6 +20,10 @@ let schema = new Schema({
     ids: {
         type: [String],
         required: true
+    },
+    packages: {
+        type: [],
+        required: false
     },
     description: {
         type: String,

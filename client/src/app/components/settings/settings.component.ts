@@ -10,12 +10,10 @@ import { DataSourceService } from '../../services/datasource.service';
 })
 export class SettingsComponent {
 
-    private opened: Boolean = false;
+    private opened: boolean = false;
 
     private datasources: DataSource[];
     private dataformats: string[] = ['json', 'csv', 'geojson', 'xlsx', 'txt', 'pdf', 'odt'];
-
-    
 
     constructor(private dataService: DataSourceService) {
         this.init();

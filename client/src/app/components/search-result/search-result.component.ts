@@ -24,9 +24,11 @@ export class SearchResultComponent {
 
     @Input("result") result: SearchResult;
 
-    @Input() cartItems : ResourceResult[];
-    @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+    @Input() cartItems: ResourceResult[];
+    @Output() cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
 
+    private visualizedResource;
+    private visualizeModalOpen: boolean = false;
 
     constructor(private router: Router, private labelService: LabelService) {
     }
@@ -42,5 +44,14 @@ export class SearchResultComponent {
         } else {
             this.open = "open";
         }
+    }
+
+    triggerVisualizeModal(resource: ResourceResult) {
+        this.visualizedResource = resource;
+        this.visualizeModalOpen = true;
+    }
+
+    updateVisualizeModalOpen(newValue: boolean) {
+        this.visualizeModalOpen = newValue;
     }
 }

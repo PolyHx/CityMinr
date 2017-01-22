@@ -1,4 +1,6 @@
 <div class="row">
+
+	<visualize-modal [open]="visualizeModalOpen" (openChange)="updateVisualizeModalOpen($event)" [resource]="visualizedResource"></visualize-modal>
 	<div class="col-sm-12 search-result-row">
 		<div class="card">
 			<div class="card-header">
@@ -21,7 +23,7 @@
 			</div>
 		</div>
 		<div class="card-block" *ngFor="let resource of result.resources; let i = index; trackBy: i">
-			<resource [(cartItems)]="cartItems" (cartItemsChange)="updateCart($event)" [resource]="resource"></resource>
+			<resource [(cartItems)]="cartItemsMain" (cartItemsChange)="updateCart($event)" [resource]="resource" (triggerVisualize)="triggerVisualizeModal($event)"></resource>
 		</div>
 	</div>
 </div>

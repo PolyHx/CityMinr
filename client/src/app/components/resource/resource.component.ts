@@ -25,8 +25,9 @@ export class ResourceComponent implements DoCheck {
 
     @Input("resource") resource
 
-    @Input("cartItems") cartItems: ResourceResult[];
-    @Output("cartItemsChange") cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+    @Input() cartItems: ResourceResult[];
+    @Output() cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+    @Output() triggerVisualize = new EventEmitter();
 
     private cartState: string = "notInCart";
 
@@ -68,7 +69,14 @@ export class ResourceComponent implements DoCheck {
         if (index > -1) {
             this.cartItems.splice(index, 1);
         }
+<<<<<<< HEAD
 
         this.cartItemsChange.emit(this.cartItems);
+=======
+    }
+
+    clickVisualize() {
+        this.triggerVisualize.emit(this.resource);
+>>>>>>> 8e7f4319316e795e206c84a7deefc33d5929e61e
     }
 }
