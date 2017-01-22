@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchResult, ResourceResult } from '../../domain/search-result.model';
 import { SearchService } from '../../services/search.service';
@@ -8,19 +8,22 @@ import { FormsModule } from '@angular/forms';
     selector: 'main-component',
     templateUrl: './main.template.html'
 })
+
 export class MainComponent {
+
+    @ViewChild('search') search;
 
     private searchResults : SearchResult[];
 
-    private cartItemsMain : ResourceResult[];
+    private cartItemsMain : ResourceResult[] = [];
 
     constructor(private router: Router, private searchService: SearchService) {
         this.init();
     }
 
     updateCart(result : ResourceResult[]) {
-        console.log('Main' + result);
         this.cartItemsMain = result;
+        console.log(this.cartItemsMain);
     }
 
 

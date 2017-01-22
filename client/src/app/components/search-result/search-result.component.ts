@@ -33,8 +33,7 @@ export class SearchResultComponent {
     constructor(private router: Router, private labelService: LabelService) {
     }
 
-    updateCart(result: ResourceResult[]) {
-        console.log('search' + result);
+    updateCart(result : ResourceResult[]) {
         this.cartItems = result;
         this.cartItemsChange.emit(result);
     }
