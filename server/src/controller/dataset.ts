@@ -13,6 +13,16 @@ module Controller {
             this.repo = new DatasetRepository();
         }
 
+        public async create(datasetModel: IDatasetModel) {
+
+            try {
+                this.repo.create(datasetModel);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+
         public async getAll(): Promise<IDatasetModel[]> {
 
             let datasets = await this.repo.find({});
