@@ -10,4 +10,4 @@
 <a class="nav-link nav-icon" href="javascript://">
 	<clr-icon shape="analytics" size="22" class="pull-right spaced-button" (click)="clickVisualize()"></clr-icon>
 </a>
-<span class="pull-right label {{ labelService.getClassForFileType(resource?.format) }}">{{ resource?.format }}</span>
+<span class="pull-right label {{ labelService.getClassForFileType(resource?.format) }}">{{ resource?.format.toUpperCase() }}</span>

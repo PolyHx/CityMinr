@@ -10,6 +10,10 @@
     background: url("images/logo.svg") no-repeat;
 }
 
+body {
+    overflow: hidden;
+}
+
 .sidenav,
 .branding {
     min-width: 300px !important;
@@ -161,4 +165,30 @@
 }
 .top-modal {
     z-index: 100 !important;
+}
+
+.footer-code{
+    width: 100%;
+    height: calc(100vh - 120px)!important;
+}
+
+code-viewer{
+    width: 100%!important;
+}
+
+code-viewer > div{
+    width: 100%!important;
+    height: calc(100vh - 120px)!important;
+}
+
+.footer-view .content-container{
+    max-height: calc(100vh - 120px)!important;
+}
+.code-preview {
+    width: 100%;
+}
+
+.spinner-container{
+    width: 100%;
+    text-align: center;
 }

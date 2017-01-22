@@ -1,44 +1,54 @@
 <div class="footer">
 	<div class="footer-header">
 		<span *ngIf="itemCount > 1">
-		{{itemCount}} Items
-	</span>
+			{{itemCount}} Items
+		</span>
 		<span *ngIf="itemCount <= 1">
-		{{itemCount}} Items
-	</span>
-		<a class="pull-right btn btn-sm" *ngIf="state == 'expanded'" (click)="toogleView()" href="javascript://">
-		Generate Snippet
-	</a>
-		<a class="pull-right btn btn-sm" *ngIf="state == 'collapsed'" (click)="toogleView()" href="javascript://">
-		Close
-	</a>
+			{{itemCount}} Items
+		</span>
+		<a class="pull-right btn btn-sm" *ngIf="state == 'expanded'" (click)="toogleView()" href="javascript://">Generate Snippet</a>
+		<a class="pull-right " *ngIf="state == 'collapsed'" (click)="toogleView()" href="javascript://"><clr-icon shape="close"></clr-icon></a>
+		<clr-dropdown class="pull-right" *ngIf="state == 'collapsed'" [clrMenuPosition]="'bottom-right'">
+			<a href="javascript://" class="btn btn-sm" clrDropdownToggle>
+        		{{lang}}
+        		<clr-icon shape="caret down"></clr-icon>
+    		</a>
+			<div class="dropdown-menu">
+				<label class="dropdown-header">Laguages</label>
+				<a (click)="lang = 'javascript'; generateCode()" href="javascript://" clrDropdownItem>JavaScript</a>
+				<a (click)="lang = 'php'; generateCode()" href="javascript://" clrDropdownItem>PHP</a>
+				<a (click)="lang = 'nodejs'; generateCode()" href="javascript://" clrDropdownItem>NodeJS</a>
+				<a (click)="lang = 'ruby'; generateCode()" href="javascript://" clrDropdownItem>Ruby</a>
+			</div>
+		</clr-dropdown>
 	</div>
 
 	<div class="footer-view" [@openClose]="state">
 		<div class="main-container white-bg">
-    <div class="content-container">
-        <nav class="sidenav">
-            <section class="sidenav-content">
-                <section class="nav-group">
-                    <label for="tabexample2">Selected Resources</label>
-                    <ul class="nav-list" *ngFor="let resource of cartItems">
-                        <li>
-							<a href="javascript://">
-								<clr-icon class="footer-delete-item-btn" (click)="removeSource(resource)" shape="close" size="22"></clr-icon>
-							</a>
-							<span>
+			<div class="content-container">
+				<nav class="sidenav">
+					<section class="sidenav-content">
+						<section class="nav-group">
+							<label for="">Selected Resources</label>
+							<ul class="nav-list" *ngFor="let resource of cartItems">
+								<li>
+									<a href="javascript://">
+										<clr-icon class="footer-delete-item-btn" (click)="removeSource(resource)" shape="close" size="22"></clr-icon>
+									</a>
+									<span>
 								{{resource.name}}
 							</span>
-						</li>
-                    </ul>
-                </section>
-            </section>
-        </nav>
-    </div>
-	<div>
-		<code-viewer [code]="code" [mode]="'javascript'" [readOnly]="false"></code-viewer>
-	</div>
+								</li>
+							</ul>
+						</section>
+					</section>
+				</nav>
+				<div class="footer-code">
+					<code-viewer class="code" [(code)]="code" [readOnly]="'nocursor'"></code-viewer>
+				</div>
+			</div>
 
-</div>
+
+		</div>
 	</div>
 </div>

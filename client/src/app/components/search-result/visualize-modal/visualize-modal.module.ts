@@ -7,7 +7,7 @@ import { VisualizeModalComponent } from './visualize-modal.component';
 
 @NgModule({
     declarations: [
-        VisualizeModalComponent
+        VisualizeModalComponent,
     ],
     imports: [
         BrowserModule,
