@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
-    "jquery": "registry:dt/jquery#1.10.0+20170104155652"
+    "jquery": "registry:dt/jquery#1.10.0+20170104155652",
+    "pdfobject": "registry:dt/pdfobject#2.0.201604172+20161005184000"
   }
 }

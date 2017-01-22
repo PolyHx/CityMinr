@@ -5,7 +5,6 @@
 		<pre class="code-preview" *ngIf="!loading && resource?.format == 'json'">
 			<code clr-code-highlight="language-javascript">{{ resourceContent }}</code>
 		</pre>
-		<pdf-viewer *ngIf="!loading && resource?.format == 'pdf'" [src]="resource?.url" [original-size]="true" style="display: block;"></pdf-viewer>
 		<div class="spinner-container" *ngIf="loading">
 			<div class="spinner">
 			</div>
