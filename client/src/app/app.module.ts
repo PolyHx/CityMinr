@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HashLocationStrategy, Location, LocationStrategy } from '@angular/common';
 import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
 import { ROUTING } from "./app.routes";
@@ -36,6 +37,8 @@ import { SettingService } from './services/setting.service';
         DashboardModule
     ],
     providers: [
+        Location,
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
         AuthenticatedGuard,
         DataSourceService,
         SearchService,
