@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { ROUTING } from "./app.routes";
 import { DataSourceService } from './services/datasource.service';
 import { SearchService } from './services/search.service';
+import { SettingService } from './services/setting.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SearchService } from './services/search.service';
         SearchService,
         LabelService,
         LoginService,
-        DataService
+        DataService,
+        SettingService
     ],
     bootstrap: [AppComponent]
 })

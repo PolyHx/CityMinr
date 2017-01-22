@@ -1,10 +1,17 @@
 import { Injectable } from "@angular/core";
 
-import { DataSource } from "../domain/datasource.model";
+import { DataSource } from '../domain/datasource.model';
 import { ResourceResult, SearchResult, FormatInfo } from '../domain/search-result.model';
+import { SettingService } from './setting.service';
 
 @Injectable()
 export class SearchService {
+
+    private lastQuery: string = '';
+
+    constructor(private settingService: SettingService) {
+
+    }
 
     extractResult(res: any) {
         let result: SearchResult = {
@@ -30,19 +37,35 @@ export class SearchService {
         return result;
     }
 
+    save(query: string) {
+        this.lastQuery = query;
+    }
+
     search(query: string): Promise<SearchResult[]> {
         return new Promise((resolve, reject) => {
 
             var request = require("request");
+
+            let data = this.settingService.getDataSource();
+            let formats = this.settingService.getFormats();
+
+            let datastr: string = ''; let formatstr: string = '';
+            for (let d of data) {
+                datastr += d + ',';
+            }
+
+            for (let f of formats) {
+                formatstr += f + ',';
+            }
 
             var options = {
                 method: 'GET',
                 url: 'http://localhost:8080/search',
                 qs:
                 {
-                    query: 'transport',
-                    datasets: '5884057af36d2855565376c6',
-                    formats: 'json,geojson'
+                    query: query,
+                    datasets: datastr,
+                    formats: formatstr
                 },
                 headers:
                 {
@@ -54,8 +77,10 @@ export class SearchService {
             request(options, function (error, response, body) {
                 if (error) throw new Error(error);
 
+
                 var obj = JSON.parse(body);
-                var result: SearchResult[] =[];
+                console.log(obj);
+                var result: SearchResult[] = [];
                 for (let ob of obj['response']) {
                     result.push(self.extractResult(ob));
                 }

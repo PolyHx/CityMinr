@@ -18,7 +18,6 @@ export class MainComponent {
     private cartItemsMain : ResourceResult[] = [];
 
     constructor(private router: Router, private searchService: SearchService) {
-        this.init();
     }
 
     updateCart(result : ResourceResult[]) {
@@ -26,7 +25,7 @@ export class MainComponent {
     }
 
 
-    async init() {
-        this.searchResults = await this.searchService.search('cacamiel');
+    async query(query: string) {
+        this.searchResults = await this.searchService.search(query);
     }
 }

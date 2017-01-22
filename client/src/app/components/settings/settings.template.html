@@ -10,13 +10,13 @@
     <div class="modal-body row">
         <div class="col-sm-3 offset-sm-2 separator">
             <ul *ngFor="let datasource of datasources; let i = index; trackBy: i">
-                <control [id]="i" [name]="datasource.name" [class]="'toggle-switch control pull-right'" [selected]="true">
+                <control [id]="datasource.name" (click)="updateDataSource($event.target.name, $event.target.checked)" [name]="datasource.name" [class]="'toggle-switch control pull-right'" [selected]="true">
                 </control>
             </ul>
         </div>
         <div class="col-sm-6 row">
             <ul *ngFor="let format of dataformats; let i = index; trackBy: i" class="col-sm-3">
-                <control [id]="i" [name]="format" [class]="'checkbox control'" [selected]="true">
+                <control (click)="updateFormats($event.target.name, $event.target.checked)" [id]="format" [name]="format" [class]="'checkbox control'" [selected]="true">
                 </control>
             </ul>
         </div>
