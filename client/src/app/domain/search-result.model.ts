@@ -16,7 +16,6 @@ export interface SearchResult {
     id: string;
     license_title: string;
     resources: ResourceResult[];
-    num_resources: number;
     methodologie: string;
     groups: string[];
     title: string;

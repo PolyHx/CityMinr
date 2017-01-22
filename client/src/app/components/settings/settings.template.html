@@ -10,7 +10,7 @@
     <div class="modal-body row">
         <div class="col-sm-3 offset-sm-2 separator">
             <ul *ngFor="let datasource of datasources; let i = index; trackBy: i">
-                <control [id]="i" [name]="datasource.name" [class]="'toggle-switch control'" [selected]="true">
+                <control [id]="i" [name]="datasource.name" [class]="'toggle-switch control pull-right'" [selected]="true">
                 </control>
             </ul>
         </div>
