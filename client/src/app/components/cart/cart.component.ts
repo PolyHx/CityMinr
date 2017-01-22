@@ -25,16 +25,14 @@ export class CartComponent {
 
     state: string;
 
-    private opened: Boolean = false;
+    private opened: boolean = false;
     private itemCount: number = 0;
+
+    private code: string = "No sources selected";
+    private lang: string = "Select a laguage";
 
     @Input() cartItems : ResourceResult[];
     @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
-
-    private code: string = "{\n" +
-    "   id: 'caca2'\n" +
-    "   name: 'Quebec'\n" +
-    "}\n";
 
     constructor() {
         this.state = 'expanded';
@@ -55,7 +53,13 @@ export class CartComponent {
 
         if (index > -1) {
             this.cartItems.splice(index, 1);
+            this.itemCount = this.cartItems.length;
         }   
+
+        if (this.itemCount === 0) {
+             this.code = "No sources selected";
+             this.lang = "Select a laguage";
+        }
 
         this.cartItemsChange.emit(this.cartItems);
     }
@@ -63,6 +67,38 @@ export class CartComponent {
     updateCart(result:ResourceResult[]) {
         this.cartItems = result;
         this.itemCount = this.cartItems.length;
+    }
+
+    generateCode() {
+        if (this.itemCount) {
+            switch (this.lang) {
+                case 'javascript':
+                   this.code = `function loadSources() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = httpRequest.responseText
+            console.log(response);
+        } else {
+            console.log('There was a problem with the request.');
+        }
+    };
+    xhttp.open("GET", "` + this.cartItems[0].url + `", true);
+    xhttp.send();
+}`
+                    break;
+
+                case 'php':
+                    break;
+
+                case 'nodejs':
+                    break;
+
+                case 'ruby':
+                    break;
+
+            }
+        }
     }
 
 }

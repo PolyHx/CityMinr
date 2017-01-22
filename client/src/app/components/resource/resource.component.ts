@@ -43,6 +43,7 @@ export class ResourceComponent implements DoCheck {
     }
 
     ngDoCheck() {
+        if (this.cartItems) {
             let index = this.cartItems.indexOf(this.resource);
 
             if (index < 0) {
@@ -50,8 +51,7 @@ export class ResourceComponent implements DoCheck {
             } else {
                 this.cartState = "inCart";
             }
-
-
+        }
     }
 
     addToCart() {
