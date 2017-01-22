@@ -4,7 +4,7 @@ export let Schema = mongoose.Schema;
 export let ObjectId = mongoose.Schema.Types.ObjectId;
 export let Mixed = mongoose.Schema.Types.Mixed;
 
-export interface IDataset extends mongoose.Document {
+export interface IDatasetModel extends mongoose.Document {
 
     name: string;
     url: string;
@@ -33,7 +33,7 @@ let schema = new Schema({
 
 }).pre('save' , function(next) {
     if (this._doc) {
-        let doc = <IDataset>this._doc;
+        let doc = <IDatasetModel>this._doc;
         let now = new Date();
         if (!doc.createdAt) {
             doc.createdAt = now;
@@ -44,9 +44,9 @@ let schema = new Schema({
     return this;
 });
 
-export let DatasetSchema = mongoose.model<IDataset>("tag", schema, "tags", true);
+export let DatasetSchema = mongoose.model<IDatasetModel>("dataset", schema, "datasets", true);
 
-export class DatasetRepository extends RepositoryBase<IDataset> {
+export class DatasetRepository extends RepositoryBase<IDatasetModel> {
     constructor() {
         super(DatasetSchema);
     }
