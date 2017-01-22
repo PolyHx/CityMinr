@@ -5,9 +5,14 @@ import * as logger from "morgan";
 import * as cors from "cors";
 
 import { initialize } from "./models/database";
+
 import { Info } from "./route/info";
 import { Index } from "./route/index";
+import { Search } from "./route/search";
+import * as DatasetRoute from "./route/dataset";
+
 import { CityData } from "./controller/citydata";
+import { Dataset } from "./controller/dataset";
 
 export class Server {
     public app: express.Application;
@@ -16,7 +21,7 @@ export class Server {
         this.app = express();
         this.config();
         this.routes();
-        initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
+        //initialize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD);
         console.log("Started server v" + process.env.VERSION + " in " + process.env.NODE_ENV + " mode! Listening on port " + process.env.PORT + ".");
         this.crawl();
     }
@@ -47,13 +52,22 @@ export class Server {
     private routes() {
         let info: Info = new Info();
         let index: Index = new Index();
+        let search: Search = new Search();
+        let dataset: DatasetRoute.Dataset = new DatasetRoute.Dataset();
 
         this.app.use("/", index.router);
+        this.app.use("/search", search.router);
         this.app.use("/info", info.router);
+        this.app.use("/dataset", dataset.router);
     }
 
-    private crawl() {
-        let controller: CityData = new CityData();
-        controller.crawlData();
+    private async crawl() {
+         let controller: CityData = new CityData();
+         let datasetController: Dataset = new Dataset();
+
+         let datasets = await datasetController.getAll();
+         for (let dataset of datasets) {
+             controller.crawlData(dataset.url);
+         }
     }
 }

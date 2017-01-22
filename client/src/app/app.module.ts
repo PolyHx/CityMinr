@@ -1,3 +1,5 @@
+import { AuthenticatedGuard } from './utils/authenticated.guard';
+import { LoginService } from './services/login.service';
 import { LoginModule } from './components/login/login.module';
 import { LabelService } from './services/label.service';
 import { MainModule } from './components/main/main.module';
@@ -29,9 +31,14 @@ import { SearchService } from './services/search.service';
         //Custom modules
         LoginModule,
         DashboardModule
-
     ],
-    providers: [DataSourceService, SearchService, LabelService],
+    providers: [
+        AuthenticatedGuard,
+        DataSourceService, 
+        SearchService, 
+        LabelService, 
+        LoginService
+        ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

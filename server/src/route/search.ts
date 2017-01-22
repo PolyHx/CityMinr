@@ -3,19 +3,19 @@ import * as path from 'path';
 
 module Route {
 
-    export class Index {
+    export class Search {
 
         public router: express.Router;
 
         constructor() {
             this.router = express.Router();
 
-            this.router.get("/", this.index.bind(this));
+            this.router.get("/", this.search.bind(this));
         }
 
-        private index(req: express.Request, res: express.Response) {
+        private search(req: express.Request, res: express.Response) {
 
-            res.sendFile(path.join(__dirname + "/../public/index.html"));
+            res.json({text: "Fuck Richer"});
         }
     }
 }

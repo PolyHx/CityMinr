@@ -22,6 +22,7 @@ import { ResourceResult } from '../../domain/search-result.model';
     ]
 })
 export class ResourceComponent {
+
     @Input("resource") resource
 
     @Input() cartItems: ResourceResult[];
