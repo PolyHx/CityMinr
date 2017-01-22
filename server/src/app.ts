@@ -4,6 +4,12 @@ import * as path from "path";
 import * as logger from "morgan";
 import * as cors from "cors";
 
+if (process.env.NODE_ENV === "local") {
+    process.env.DB_NAME = "ds117899.mlab.com:17899/cityminr_conu";
+    process.env.DB_USERNAME = "lassondehacks";
+    process.env.DB_PASSWORD = "conuCityMinr2017!";
+}
+
 import { initialize } from "./models/database";
 
 import { Info } from "./route/info";
@@ -65,11 +71,11 @@ export class Server {
     }
 
     private async crawl() {
-       // let controller: CityData = new CityData();
-       // let datasetController: Dataset = new Dataset();
-       // let datasets = await datasetController.getAll();
-       // for (let dataset of datasets) {
-       //     await controller.crawlData(dataset);
-       // }
+        // let controller: CityData = new CityData();
+        // let datasetController: Dataset = new Dataset();
+        // let datasets = await datasetController.getAll();
+        // for (let dataset of datasets) {
+        //     await controller.crawlData(dataset);
+        // }
     }
 }

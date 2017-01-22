@@ -7,7 +7,7 @@ export let Mixed = mongoose.Schema.Types.Mixed;
 
 export interface IHistoryModel extends mongoose.Document {
     userEmail: string;
-    resources: IResourceModel[];
+    resources: string[];
     createdAt?: Date;
     modifiedAt?: Date;
 }
@@ -18,7 +18,7 @@ let schema = new Schema({
         required: true
     },
     resources: [{
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "resource" 
     }],
     createdAt: {
