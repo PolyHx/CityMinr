@@ -4,6 +4,7 @@ import { PackageSearchResult } from "../models/city_data";
 import { ITagModel, TagRepository } from "../models/tags";
 import { IResourceModel, ResourceRepository } from "../models/ressources";
 import { IGroupModel, GroupRepository } from "../models/groups";
+import { IPackageModel, PackageRepository } from "../models/package";
 
 module Controller {
 
@@ -18,7 +19,20 @@ module Controller {
                     let tagRepo: TagRepository = new TagRepository();
                     let resRepo: ResourceRepository = new ResourceRepository();
                     let groupRepo: GroupRepository = new GroupRepository();
+                    let packageRepo: PackageRepository = new PackageRepository();
                     for (let result of response.result.results) {
+                        let packtemp = await packageRepo.findOne({ id: result.id });
+                        if (!packtemp) {
+                            packageRepo.create(<IPackageModel>{
+                                id: result.id,
+                                metadata_modified: result.metadata_modified,
+                                language: result.language,
+                                methodologie: result.methodologie,
+                                name: result.name,
+                                title: result.title,
+                                resources: []
+                            });
+                        }
                         for (let tag of result.tags) {
                             let tmp = await tagRepo.findOne({ name: tag.name.toLowerCase() });
                             if (!tmp) {
@@ -73,13 +87,13 @@ module Controller {
                                         url: resource.url,
                                         size: resource.size
                                     });
+                                    packtemp.resources.push(resource.id);
+                                    packtemp.save();
                                 }
                             }
                         }
                     }
-                } else {
-                    console.log("no sucess!");
-                }
+                } 
             });
         }
     }
