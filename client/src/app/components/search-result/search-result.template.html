@@ -1,4 +1,6 @@
 <div class="row">
+
+	<visualize-modal [open]="visualizeModalOpen" (openChange)="updateVisualizeModalOpen($event)" [resource]="visualizedResource"></visualize-modal>
 	<div class="col-sm-12 search-result-row">
 		<div class="card">
 			<div class="card-header">
@@ -8,24 +10,20 @@
 				<a class="nav-link nav-icon" href="javascript://">
 					<clr-icon shape="caret" [@caretState]="open" size="22" class="pull-right" (click)="openDropdown()"></clr-icon>
 				</a>
-				<span class="pull-right label {{ labelService.getClassForFileType('JSON') }}">JSON</span>
-				<span class="pull-right label {{ labelService.getClassForFileType('CSV') }}">CSV</span>
-				<span class="pull-right label {{ labelService.getClassForFileType('PDF') }}">PDF</span>
-				<span class="pull-right label {{ labelService.getClassForFileType('XML') }}">XML</span>
-				<span class="pull-right label {{ labelService.getClassForFileType('DOCX') }}">DOCX</span>
+				<div class="pull-right" *ngFor="let formatInfo of result.formats; let i = index; trackBy: i">
+					<span class="pull-right label {{ labelService.getClassForFileType(formatInfo.format) }}">{{formatInfo.format}}<span class="badge">{{formatInfo.count}}</span></span>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="card card-dropdown" *ngIf="open == 'open'">
 		<div class="card-block">
-			<div class="card-title">
-			</div>
 			<div class="card-text">
-				...
+				{{result.methodologie}}
 			</div>
 		</div>
-		<div class="card-block">
-			<resource [resource]="resource"></resource>
+		<div class="card-block" *ngFor="let resource of result.resources; let i = index; trackBy: i">
+			<resource [(cartItems)]="cartItemsMain" (cartItemsChange)="updateCart($event)" [resource]="resource" (triggerVisualize)="triggerVisualizeModal($event)"></resource>
 		</div>
 	</div>
 </div>

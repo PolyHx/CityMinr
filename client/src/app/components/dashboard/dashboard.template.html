@@ -1,3 +1,5 @@
+<div id="signin2" style="display: none">
+</div>
 <clr-main-container>
 	<clr-header class="header-4">
 		<div class="branding">
@@ -21,6 +23,27 @@
 		</div>
 		<nav class="sidenav">
 			<section class="sidenav-content">
+				<div class="row user-info-container">
+					<div class="col-sm-2 no-padding">
+						<img class="user-profile-picture" src="{{ activeUser?.image_url }}">
+					</div>
+					<div class="col-sm-8">
+						{{ activeUser?.full_name }}<br>
+						<small>
+                        {{ activeUser?.email }}
+                        </small>
+					</div>
+					<div class="col-sm-1 edit-user-button">
+						<clr-dropdown [clrMenuPosition]="'bottom-right'">
+							<button clrDropdownToggle>
+                                <clr-icon shape="caret down"></clr-icon>
+                            </button>
+							<div class="dropdown-menu">
+								<a (click)="clickLogout()" clrDropdownItem>Sign out</a>
+							</div>
+						</clr-dropdown>
+					</div>
+				</div>
 				<section class="nav-group">
 					<label for="tabexample2">History</label>
 					<ul class="nav-list">
