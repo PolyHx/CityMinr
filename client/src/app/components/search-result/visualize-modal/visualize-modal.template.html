@@ -1,8 +1,15 @@
-<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'lg'" class="top-modal" *ngIf="open">
+<clr-modal [(clrModalOpen)]="open" [clrModalSize]="'lg'" class="top-modal">
 	<h3 class="modal-title">Preview</h3>
 
 	<div class="modal-body row">
-        <code-viewer [code]="code" [mode]="'javascript'" [readOnly]="false"></code-viewer>
+		<pre class="code-preview" *ngIf="!loading && resource?.format == 'json'">
+			<code clr-code-highlight="language-javascript">{{ resourceContent }}</code>
+		</pre>
+		<pdf-viewer *ngIf="!loading && resource?.format == 'pdf'" [src]="resource?.url" [original-size]="true" style="display: block;"></pdf-viewer>
+		<div class="spinner-container" *ngIf="loading">
+			<div class="spinner">
+			</div>
+		</div>
 	</div>
 
 	<div class="modal-footer">

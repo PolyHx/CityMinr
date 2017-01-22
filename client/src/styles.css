@@ -148,3 +148,12 @@
 .top-modal {
     z-index: 100 !important;
 }
+
+.code-preview {
+    width: 100%;
+}
+
+.spinner-container{
+    width: 100%;
+    text-align: center;
+}
