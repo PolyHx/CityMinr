@@ -52,7 +52,7 @@
 }
 
 .search-result-row {
-    z-index: 1;
+    z-index: 2;
 }
 
 .button-header {
@@ -143,4 +143,8 @@
 .edit-user-button {
     z-index: 2;
     padding-top: 12px;
+}
+
+.top-modal {
+    z-index: 100 !important;
 }

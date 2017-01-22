@@ -27,6 +27,7 @@ export class ResourceComponent {
 
     @Input() cartItems: ResourceResult[];
     @Output() cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+    @Output() triggerVisualize = new EventEmitter();
 
     private cartState: string = "notInCart";
 
@@ -59,6 +60,10 @@ export class ResourceComponent {
 
         if (index > -1) {
             this.cartItems.splice(index, 1);
-        }   
+        }
+    }
+
+    clickVisualize() {
+        this.triggerVisualize.emit(this.resource);
     }
 }
