@@ -12,7 +12,7 @@ module Route {
             this.router = express.Router();
             this.dataset = new datasetController.Dataset();
 
-            this.router.get("/", this.getAll);
+            this.router.get("/", this.getAll.bind(this));
         }
 
         private async getAll(req: express.Request, res: express.Response) {
