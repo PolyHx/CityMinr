@@ -7,6 +7,16 @@ import { IGroupModel, GroupRepository } from "../models/group";
 import { IPackageModel, PackageRepository } from "../models/package";
 import { IDatasetModel } from "../models/dataset";
 
+function findTag(tag: ITagModel) {
+
+    return tag.name === this.name.toLowerCase();
+}
+
+function findGroup(group: string) {
+
+    return group === this.toLowerCase();
+}
+
 module Controller {
 
     export class CityData {
@@ -40,7 +50,9 @@ module Controller {
                             for (let tag of result.tags) {
                                 let tmp = await tagRepo.findOne({ name: tag.name.toLowerCase() });
                                 if (!tmp) {
-                                    tagRepo.create(<ITagModel>{ ids: new Array<string>(tag.id), name: tag.name.toLowerCase() });
+                                    tmp = await tagRepo.create(<ITagModel>{ ids: new Array<string>(tag.id), name: tag.name.toLowerCase() });
+                                    packtemp.tags.push(tmp);
+                                    packtemp.save();
                                 } else {
                                     let isPresent: boolean = false;
                                     for (let id of tmp.ids) {
@@ -52,6 +64,10 @@ module Controller {
                                     if (!isPresent) {
                                         tmp.ids.push(tag.id);
                                         tmp.save();
+                                    }
+                                    if (!packtemp.tags.find(findTag, tmp)) {
+                                        packtemp.tags.push(tmp);
+                                        packtemp.save();
                                     }
                                 }
                             }
@@ -78,11 +94,14 @@ module Controller {
                                     tmp = await groupRepo.create(<IGroupModel>{
                                         ids: new Array<string>(group.id),
                                         packages: [],
+                                        tags: [],
                                         description: group.description,
                                         title: group.title,
                                         name: group.name.toLowerCase(),
                                         image_display_url: group.image_display_url
                                     });
+                                    packtemp.groups.push(tmp.name);
+                                    packtemp.save();
                                 } else {
                                     let isPresent: boolean = false;
                                     for (let id of tmp.ids) {
@@ -94,6 +113,10 @@ module Controller {
                                     if (!isPresent) {
                                         tmp.ids.push(group.id);
                                         tmp.save();
+                                    }
+                                    if (!packtemp.groups.find(findGroup, tmp.name)) {
+                                        packtemp.groups.push(tmp.name);
+                                        packtemp.save();
                                     }
                                 }
                                 let isPresent: boolean = false;
@@ -107,6 +130,12 @@ module Controller {
                                     tmp.packages.push(packtemp);
                                     tmp.save();
                                 }
+                                for (let tag of result.tags) {
+                                    if (!tmp.tags.find(findTag, tag)) {
+                                        tmp.tags.push(await tagRepo.findOne({name: tag.name.toLowerCase()}));
+                                    }
+                                }
+                                tmp.save();
                             }
                         }
                     } else {

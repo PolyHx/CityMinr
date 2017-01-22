@@ -1,6 +1,8 @@
 import * as mongoose from 'mongoose';
 import { RepositoryBase } from './database';
 import { IResourceModel } from './resource';
+import { ITagModel } from './tag';
+import { IGroupModel } from './group';
 export let Schema = mongoose.Schema;
 export let ObjectId = mongoose.Schema.Types.ObjectId;
 export let Mixed = mongoose.Schema.Types.Mixed;
@@ -12,6 +14,8 @@ export interface IPackageModel extends mongoose.Document {
     license_title?: string;
     metadata_modified: string;
     resources?: IResourceModel[];
+    tags?: ITagModel[];
+    groups?: string[];
     language?: string;
     methodologie?: string;
     name: string;
@@ -40,6 +44,14 @@ let schema = new Schema({
     },
     resources: {
         type: [],
+        required: false
+    },
+    tags: {
+        type: [],
+        required: false
+    },
+    groups: {
+        type: [String],
         required: false
     },
     language: {
