@@ -62,12 +62,12 @@ export class Server {
     }
 
     private async crawl() {
-        // let controller: CityData = new CityData();
-        // let datasetController: Dataset = new Dataset();
+        let controller: CityData = new CityData();
+        let datasetController: Dataset = new Dataset();
 
-        // let datasets = await datasetController.getAll();
-        // for (let dataset of datasets) {
-        //     controller.crawlData(dataset.url);
-        // }
+        let datasets = await datasetController.getAll();
+        for (let dataset of datasets) {
+            controller.crawlData(dataset);
+        }
     }
 }

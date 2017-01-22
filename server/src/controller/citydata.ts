@@ -5,12 +5,13 @@ import { ITagModel, TagRepository } from "../models/tags";
 import { IResourceModel, ResourceRepository } from "../models/ressources";
 import { IGroupModel, GroupRepository } from "../models/groups";
 import { IPackageModel, PackageRepository } from "../models/package";
+import { IDatasetModel } from "../models/dataset";
 
 module Controller {
 
     export class CityData {
-        public async crawlData(url: string) {
-            request.get(url + "/action/package_search?q=*:*&rows=1000", async (err, res, body) => {
+        public async crawlData(dataset: IDatasetModel) {
+            request.get(dataset.url + "/action/package_search?q=*:*&rows=1000", async (err, res, body) => {
                 if (err) {
                     console.log("Error:" + err);
                 }
@@ -24,8 +25,10 @@ module Controller {
                         for (let result of response.result.results) {
                             let packtemp = await packageRepo.findOne({ id: result.id });
                             if (!packtemp) {
-                                packageRepo.create(<IPackageModel>{
+                                packtemp = await packageRepo.create(<IPackageModel>{
                                     id: result.id,
+                                    dataset: dataset._id,
+                                    license_title: result.license_title,
                                     metadata_modified: result.metadata_modified,
                                     language: result.language,
                                     methodologie: result.methodologie,
@@ -52,11 +55,29 @@ module Controller {
                                     }
                                 }
                             }
+                            for (let resource of result.resources) {
+                                let tmp = await resRepo.findOne({ id: resource.id });
+                                if (!tmp) {
+                                    if (resource.format) {
+                                        let res = await resRepo.create(<IResourceModel>{
+                                            id: resource.id,
+                                            description: resource.description,
+                                            name: resource.name,
+                                            format: resource.format,
+                                            url: resource.url,
+                                            size: resource.size
+                                        });
+                                        packtemp.resources.push(res);
+                                        packtemp.save();
+                                    }
+                                }
+                            }
                             for (let group of result.groups) {
                                 let tmp = await groupRepo.findOne({ name: group.name.toLowerCase() });
                                 if (!tmp) {
-                                    groupRepo.create(<IGroupModel>{
+                                    tmp = await groupRepo.create(<IGroupModel>{
                                         ids: new Array<string>(group.id),
+                                        packages: [],
                                         description: group.description,
                                         title: group.title,
                                         name: group.name.toLowerCase(),
@@ -75,22 +96,16 @@ module Controller {
                                         tmp.save();
                                     }
                                 }
-                            }
-                            for (let resource of result.resources) {
-                                let tmp = await resRepo.findOne({ id: resource.id });
-                                if (!tmp) {
-                                    if (resource.format) {
-                                        resRepo.create(<IResourceModel>{
-                                            id: resource.id,
-                                            description: resource.description,
-                                            name: resource.name,
-                                            format: resource.format,
-                                            url: resource.url,
-                                            size: resource.size
-                                        });
-                                        packtemp.resources.push(resource.id);
-                                        packtemp.save();
+                                let isPresent: boolean = false;
+                                for (let pack of tmp.packages) {
+                                    if (pack.id === packtemp.id) {
+                                        isPresent = true;
+                                        break;
                                     }
+                                }
+                                if (!isPresent) {
+                                    tmp.packages.push(packtemp);
+                                    tmp.save();
                                 }
                             }
                         }
@@ -99,7 +114,7 @@ module Controller {
                     }
                 } catch (err) {
                     console.log(err);
-                    this.crawlData(url);
+                    this.crawlData(dataset);
                 }
             });
         }

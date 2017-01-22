@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 import { RepositoryBase } from './database';
+import { IResourceModel } from './ressources';
 export let Schema = mongoose.Schema;
 export let ObjectId = mongoose.Schema.Types.ObjectId;
 export let Mixed = mongoose.Schema.Types.Mixed;
@@ -7,12 +8,14 @@ export let Mixed = mongoose.Schema.Types.Mixed;
 export interface IPackageModel extends mongoose.Document {
 
     id: string;
+    dataset: string;
+    license_title?: string;
     metadata_modified: string;
-    resources: string[];
-    language: string;
-    methodologie: string;
+    resources?: IResourceModel[];
+    language?: string;
+    methodologie?: string;
     name: string;
-    title: string;
+    title?: string;
     createdAt?: Date;
     modifiedAt?: Date;
 }
@@ -23,28 +26,36 @@ let schema = new Schema({
         type: String,
         required: true
     },
+    dataset: {
+        type: String,
+        required: true
+    },
+    license_title: {
+        type: String,
+        required: false
+    },
     metadata_modified: {
         type: String,
         required: true
     },
     resources: {
-        type: [String],
-        required: true
+        type: [],
+        required: false
     },
     language: {
         type: String,
-        required: true
+        required: false
     },
     methodologie: {
         type: String,
-        required: true
+        required: false
     },
     name: {
         type: String,
         required: true
     },title: {
         type: String,
-        required: true
+        required: false
     },
     createdAt: {
         type: Date,
