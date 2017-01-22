@@ -2,9 +2,11 @@ import { Injectable } from "@angular/core";
 
 import { DataSource } from '../domain/datasource.model';
 import { SettingService } from './setting.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class DataSourceService {
+    API_URL = environment.API_URL;
 
     private dataSource : DataSource[] = [];
 
@@ -19,7 +21,7 @@ export class DataSourceService {
 
             let options = {
                 method: 'GET',
-                url: 'http://localhost:8080/dataset',
+                url: this.API_URL + '/dataset',
                 headers: { 'cache-control': 'no-cache', 'content-type': 'application/x-www-form-urlencoded' },
             };
             var self = this;

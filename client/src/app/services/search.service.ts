@@ -3,9 +3,11 @@ import { Injectable } from "@angular/core";
 import { DataSource } from '../domain/datasource.model';
 import { ResourceResult, SearchResult, FormatInfo } from '../domain/search-result.model';
 import { SettingService } from './setting.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SearchService {
+    API_URL = environment.API_URL;
 
     private lastQuery: string = '';
     private lastResult: SearchResult[];
@@ -61,7 +63,7 @@ export class SearchService {
 
             var options = {
                 method: 'GET',
-                url: 'http://localhost:8080/search',
+                url: this.API_URL + '/search',
                 qs:
                 {
                     query: query,
