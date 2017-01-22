@@ -13,72 +13,77 @@ module Controller {
                 if (err) {
                     console.log("Error:" + err);
                 }
-                let response: PackageSearchResult = JSON.parse(body);
-                if (response.success) {
-                    let tagRepo: TagRepository = new TagRepository();
-                    let resRepo: ResourceRepository = new ResourceRepository();
-                    let groupRepo: GroupRepository = new GroupRepository();
-                    for (let result of response.result.results) {
-                        for (let tag of result.tags) {
-                            let tmp = await tagRepo.findOne({ name: tag.name.toLowerCase() });
-                            if (!tmp) {
-                                tagRepo.create(<ITagModel>{ ids: new Array<string>(tag.id), name: tag.name.toLowerCase() });
-                            } else {
-                                let isPresent: boolean = false;
-                                for (let id of tmp.ids) {
-                                    if (id === tag.id) {
-                                        isPresent = true;
-                                        break;
+                try {
+                    let response: PackageSearchResult = JSON.parse(body);
+                    if (response.success) {
+                        let tagRepo: TagRepository = new TagRepository();
+                        let resRepo: ResourceRepository = new ResourceRepository();
+                        let groupRepo: GroupRepository = new GroupRepository();
+                        for (let result of response.result.results) {
+                            for (let tag of result.tags) {
+                                let tmp = await tagRepo.findOne({ name: tag.name.toLowerCase() });
+                                if (!tmp) {
+                                    tagRepo.create(<ITagModel>{ ids: new Array<string>(tag.id), name: tag.name.toLowerCase() });
+                                } else {
+                                    let isPresent: boolean = false;
+                                    for (let id of tmp.ids) {
+                                        if (id === tag.id) {
+                                            isPresent = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!isPresent) {
+                                        tmp.ids.push(tag.id);
+                                        tmp.save();
                                     }
                                 }
-                                if (!isPresent) {
-                                    tmp.ids.push(tag.id);
-                                    tmp.save();
-                                }
                             }
-                        }
-                        for (let group of result.groups) {
-                            let tmp = await groupRepo.findOne({ id: group.id });
-                            if (!tmp) {
-                                groupRepo.create(<IGroupModel>{
-                                    ids: new Array<string>(group.id),
-                                    description: group.description,
-                                    title: group.title,
-                                    name: group.name,
-                                    image_display_url: group.image_display_url
-                                });
-                            } else {
-                                let isPresent: boolean = false;
-                                for (let id of tmp.ids) {
-                                    if (id === group.id) {
-                                        isPresent = true;
-                                        break;
-                                    }
-                                }
-                                if (!isPresent) {
-                                    tmp.ids.push(group.id);
-                                    tmp.save();
-                                }
-                            }
-                        }
-                        for (let resource of result.resources) {
-                            let tmp = await resRepo.findOne({ id: resource.id });
-                            if (!tmp) {
-                                if (resource.format) {
-                                    resRepo.create(<IResourceModel>{
-                                        id: resource.id,
-                                        description: resource.description,
-                                        name: resource.name,
-                                        format: resource.format,
-                                        url: resource.url,
-                                        size: resource.size
+                            for (let group of result.groups) {
+                                let tmp = await groupRepo.findOne({ name: group.name.toLowerCase() });
+                                if (!tmp) {
+                                    groupRepo.create(<IGroupModel>{
+                                        ids: new Array<string>(group.id),
+                                        description: group.description,
+                                        title: group.title,
+                                        name: group.name.toLowerCase(),
+                                        image_display_url: group.image_display_url
                                     });
+                                } else {
+                                    let isPresent: boolean = false;
+                                    for (let id of tmp.ids) {
+                                        if (id === group.id) {
+                                            isPresent = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!isPresent) {
+                                        tmp.ids.push(group.id);
+                                        tmp.save();
+                                    }
+                                }
+                            }
+                            for (let resource of result.resources) {
+                                let tmp = await resRepo.findOne({ id: resource.id });
+                                if (!tmp) {
+                                    if (resource.format) {
+                                        resRepo.create(<IResourceModel>{
+                                            id: resource.id,
+                                            description: resource.description,
+                                            name: resource.name,
+                                            format: resource.format,
+                                            url: resource.url,
+                                            size: resource.size
+                                        });
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        console.log("no sucess!");
                     }
-                } else {
-                    console.log("no sucess!");
+                } catch (err) {
+                    console.log(err);
+                    this.crawlData(url);
                 }
             });
         }

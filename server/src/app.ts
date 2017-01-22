@@ -5,9 +5,13 @@ import * as logger from "morgan";
 import * as cors from "cors";
 
 import { initialize } from "./models/database";
+
 import { Info } from "./route/info";
 import { Index } from "./route/index";
+import { Search } from "./route/search";
+
 import { CityData } from "./controller/citydata";
+import { Dataset } from "./controller/dataset";
 
 export class Server {
     public app: express.Application;
@@ -47,21 +51,20 @@ export class Server {
     private routes() {
         let info: Info = new Info();
         let index: Index = new Index();
+        let search: Search = new Search();
 
         this.app.use("/", index.router);
+        this.app.use("/search", search.router);
         this.app.use("/info", info.router);
     }
 
-    private crawl() {
-<<<<<<< HEAD
-        // let controller: CityData = new CityData();
-        // controller.crawlData();
-=======
+    private async crawl() {
         let controller: CityData = new CityData();
-        controller.crawlData("http://donnees.ville.montreal.qc.ca/api/3");
-        console.log("I just finished crawling the city of Montreal master Juliano!");
-       // controller.crawlData("https://www.donneesquebec.ca/recherche/fr/api/3");
-        console.log("I just finished crawling the province of Québec master Juliano!");
->>>>>>> e934dffd0e01b7caf2d1e0ea15c17485c61d02d2
+        let datasetController: Dataset = new Dataset();
+
+        let datasets = await datasetController.getAll();
+        for (let dataset of datasets) {
+            controller.crawlData(dataset.url);
+        }
     }
 }
