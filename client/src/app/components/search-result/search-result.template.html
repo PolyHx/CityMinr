@@ -1,6 +1,7 @@
 <div class="row">
 
-	<visualize-modal [open]="visualizeModalOpen" (openChange)="updateVisualizeModalOpen($event)" [resource]="visualizedResource" *ngIf="visualizeModalOpen"></visualize-modal>
+	<visualize-modal [open]="visualizeModalOpen" (openChange)="updateVisualizeModalOpen($event)" [resource]="visualizedResource"
+		*ngIf="visualizeModalOpen"></visualize-modal>
 	<div class="col-sm-12 search-result-row">
 		<div class="card">
 			<div class="card-header">
@@ -11,7 +12,7 @@
 					<clr-icon shape="caret" [@caretState]="open" size="22" class="pull-right" (click)="openDropdown()"></clr-icon>
 				</a>
 				<div class="pull-right" *ngFor="let formatInfo of result.formats; let i = index; trackBy: i">
-					<span class="pull-right label {{ labelService.getClassForFileType(formatInfo.format) }}">{{formatInfo.format.toUpperCase()}}<span class="badge">{{formatInfo.count}}</span></span>
+					<span class="pull-right label {{ labelService.getClassForFileType(formatInfo?.format) }}">{{formatInfo?.format}}<span class="badge">{{formatInfo?.count}}</span></span>
 				</div>
 			</div>
 		</div>

@@ -16,6 +16,7 @@ body {
 
 .sidenav,
 .branding {
+    z-index: 1200;
     min-width: 300px !important;
 }
 
@@ -218,4 +219,53 @@ code-viewer > div{
     left: 0;
     color: #444444;
     font-size: 24px;
+}
+
+.prediction-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    padding: 0px 0px;
+    background: white;
+    border-top: 1px solid #e7eaec;
+    height: 60px;
+    width: 100%;
+    line-height: 200%;
+}
+
+.content-area {
+    padding-bottom: 65px !important;
+}
+
+.nav-list,
+.nav-list > li{
+    height: 60px;
+}
+
+.prediction-text {
+    margin-top: 10px;
+    padding-left: 30px;
+}
+
+.prediction-icons {
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.green-checkmark {
+    color: green;
+}
+
+.red-cross {
+    color: red;
+}
+
+.red-cross:hover,
+.green-checkmark:hover {
+    cursor: pointer;
+}
+
+.nav-group > .nav-list {
+    height: 100%;
 }

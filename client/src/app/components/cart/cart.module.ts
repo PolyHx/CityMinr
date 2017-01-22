@@ -1,3 +1,4 @@
+import { PredictionModule } from './prediction/prediction.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { CodeViewerModule } from '../code-viewer/code-viewer.module';
         BrowserModule,
         FormsModule,
         CodeViewerModule,
-        ClarityModule
+        ClarityModule,
+        PredictionModule
     ],
     exports: [CartComponent]
 })

@@ -35,7 +35,6 @@ export class ResourceComponent implements DoCheck {
     }
 
     toggleCart() {
-        console.log(this.resource);
         if (this.cartState === "inCart") {
             this.removeFromCart();
         } else {

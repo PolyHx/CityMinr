@@ -1,3 +1,5 @@
+import { LoginService } from '../../services/login.service';
+import { DataService } from '../../services/data.service';
 import { Component, trigger, state, style, transition, animate, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResourceComponent } from '../resource/resource.component';
@@ -29,19 +31,32 @@ export class CartComponent {
     private itemCount: number = 0;
 
     private code: string = "No sources selected";
-    private lang: string = "Select a laguage";
+    private lang: string = "Select a language";
 
-    @Input() cartItems : ResourceResult[];
-    @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+    @Input() cartItems: ResourceResult[];
+    @Output() cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
 
-    constructor() {
+    @Output() updateHistory = new EventEmitter();
+
+    constructor(private dataService: DataService, private loginService: LoginService) {
         this.state = 'expanded';
         this.itemCount = 0;
     }
 
-    toogleView() { 
-        if(this.state === 'expanded') {
-            this.state = 'collapsed'; 
+    toogleView() {
+        if (this.state === 'expanded') {
+            this.state = 'collapsed';
+            if (this.cartItems.length > 0) {
+                this.loginService.getActiveUser().then((user) => {
+                    let resources = this.cartItems.map((item) => item.id);
+                    this.dataService.pushHistory({
+                        userEmail: user.email,
+                        resources: resources
+                    }).then(() => {
+                        this.updateHistory.emit();
+                    });
+                })
+            }
         } else {
             this.state = 'expanded';
         }
@@ -54,11 +69,11 @@ export class CartComponent {
         if (index > -1) {
             this.cartItems.splice(index, 1);
             this.itemCount = this.cartItems.length;
-        }   
+        }
 
         if (this.itemCount === 0) {
-             this.code = "No sources selected";
-             this.lang = "Select a laguage";
+            this.code = "No sources selected";
+            this.lang = "Select a laguage";
         }
 
         this.cartItemsChange.emit(this.cartItems);
@@ -66,7 +81,7 @@ export class CartComponent {
         this.generateCode();
     }
 
-    updateCart(result:ResourceResult[]) {
+    updateCart(result: ResourceResult[]) {
         this.cartItems = result;
         this.itemCount = this.cartItems.length;
 
@@ -78,7 +93,7 @@ export class CartComponent {
         if (this.itemCount) {
             switch (this.lang) {
                 case 'javascript':
-                   this.code = `function loadSources() {
+                    this.code = `function loadSources() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -92,7 +107,7 @@ export class CartComponent {
                         this.code += `xhttp.open("GET", "` + source.url + `", true);
     xhttp.send();\n\t`
                     }
-                    this.code+='}';
+                    this.code += '}';
                     break;
 
                 case 'php':
@@ -102,9 +117,9 @@ export class CartComponent {
                     break;
 
                 case 'ruby':
-                this.code = 'require "net/http"\nrequire "uri"\n\n';
+                    this.code = 'require "net/http"\nrequire "uri"\n\n';
 
-                for (let source of this.cartItems) {
+                    for (let source of this.cartItems) {
                         this.code += 'uri = URI.parse("' + source.url + '")\nhttp = Net::HTTP.new(uri.host, uri.port)\nresponse = http.request(Net::HTTP::Get.new(uri.request_uri))\nputs response.body';
                     }
                     break;

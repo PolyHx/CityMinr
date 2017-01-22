@@ -1,4 +1,8 @@
 <div *ngFor="let res of searchResults; let i = index; trackBy: i">
-    <search-result #search [cartItems]="cartItemsMain" (cartItemsChange)="updateCart($event); cart.updateCart($event)" [result]="res"></search-result>
+	<search-result #search [cartItems]="cartItemsMain" (cartItemsChange)="updateCart($event); cart.updateCart($event)" [result]="res"></search-result>
 </div>
-<cart #cart [cartItems]="cartItemsMain" (cartItemsChange)="updateCart($event); search.updateCart($event)"></cart>
+<div class="spinner-container" *ngIf="loading">
+	<div class="spinner">
+	</div>
+</div>
+<cart #cart (updateHistory)="onUpdateHistory()" [cartItems]="cartItemsMain" (cartItemsChange)="updateCart($event); search.updateCart($event)"></cart>

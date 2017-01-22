@@ -6,13 +6,13 @@ var debug = require('debug');
 
 var app = new Server().app;
 
-var port = normalizePort(process.env.PORT || '8080');
+var port = normalizePort(process.env.PORT || '8087');
 app.set('port', port);
 
 var option = {
-	ca: fs.readFileSync(''),
-	key: fs.readFileSync(''),
-	cert: fs.readFileSync('')
+	ca: fs.readFileSync('/home/julien/hackatown_io.ca-bundle'),
+  key: fs.readFileSync('/home/julien/hackatown_io.key'),
+  cert: fs.readFileSync('/home/julien/hackatown_io.crt')
 };
 
 var server = https.createServer(option, app);

@@ -4,12 +4,6 @@ import * as path from "path";
 import * as logger from "morgan";
 import * as cors from "cors";
 
-if (process.env.NODE_ENV === "local") {
-    process.env.DB_NAME = "ds117899.mlab.com:17899/cityminr_conu";
-    process.env.DB_USERNAME = "lassondehacks";
-    process.env.DB_PASSWORD = "conuCityMinr2017!";
-}
-
 import { initialize } from "./models/database";
 
 import { Info } from "./route/info";
@@ -53,7 +47,7 @@ export class Server {
             next(err);
         });
 
-        process.env.PORT = 8080;
+        process.env.PORT = 8087;
         process.env.VERSION = "0.0.1";
     }
 

@@ -10,22 +10,30 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class MainComponent {
-
     @ViewChild('search') search;
+    @ViewChild('cart') cart;
+    @Output() updateHistory = new EventEmitter();
+    private loading: boolean = false;
 
-    private searchResults : SearchResult[];
+    private searchResults: SearchResult[];
 
-    private cartItemsMain : ResourceResult[] = [];
+    private cartItemsMain: ResourceResult[] = [];
 
     constructor(private router: Router, private searchService: SearchService) {
     }
 
-    updateCart(result : ResourceResult[]) {
+    updateCart(result: ResourceResult[]) {
         this.cartItemsMain = result;
+        this.cart.updateCart(result)
     }
 
+    onUpdateHistory() {
+        this.updateHistory.emit();
+    }
 
     async query(query: string) {
+        this.loading = true;
         this.searchResults = await this.searchService.search(query);
+        this.loading = false
     }
 }
