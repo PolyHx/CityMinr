@@ -14,8 +14,7 @@ import { SearchResult, ResourceResult } from '../../domain/search-result.model';
                 height: '0'
             })),
             state('collapsed', style({
-                height: '100vh',
-                margin: '-82px 0 0 0'
+                height: '100vh'
             })),
             transition('expanded => collapsed', animate('200ms ease-in')),
             transition('collapsed => expanded', animate('200ms ease-out'))
@@ -27,12 +26,19 @@ export class CartComponent {
     state: string;
 
     private opened: Boolean = false;
+    private itemCount: number = 0;
+    private code: string;
 
     @Input() cartItems : ResourceResult[];
     @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
 
     constructor() {
         this.state = 'expanded';
+        this.itemCount = 0;
+        this.code = `
+        @Input() cartItems : ResourceResult[];
+        @Output() cartItemsChange:EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+        `;
     }
 
     toogleView() { 
@@ -41,8 +47,22 @@ export class CartComponent {
         } else {
             this.state = 'expanded';
         }
+    }
 
-        console.log(this.cartItems);
+    removeSource(resource: ResourceResult) {
+
+        let index = this.cartItems.indexOf(resource);
+
+        if (index > -1) {
+            this.cartItems.splice(index, 1);
+        }   
+
+        this.cartItemsChange.emit(this.cartItems);
+    }
+
+    updateCart(result:ResourceResult[]) {
+        this.cartItems = result;
+        this.itemCount = this.cartItems.length;
     }
 
 }

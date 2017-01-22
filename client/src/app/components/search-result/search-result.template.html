@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="card-block" *ngFor="let resource of result.resources; let i = index; trackBy: i">
-			<resource [(cartItems)]="cartItemsMain" (cartItemsChange)="updateCart($event)" [resource]="resource"></resource>
+			<resource [(cartItems)]="cartItems" (cartItemsChange)="updateCart($event)" [resource]="resource"></resource>
 		</div>
 	</div>
 </div>

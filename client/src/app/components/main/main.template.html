@@ -1,4 +1,4 @@
 <div *ngFor="let res of searchResults; let i = index; trackBy: i">
-    <search-result [(cartItems)]="cartItemsMain" (cartItemsChange)="updateCart($event)" [result]="res"></search-result>
+    <search-result #search [cartItems]="cartItemsMain" (cartItemsChange)="updateCart($event); cart.updateCart($event)" [result]="res"></search-result>
 </div>
-<cart [(cartItems)]="cartItemsMain" (cartItemsChange)="updateCart($event)"></cart>
+<cart #cart [cartItems]="cartItemsMain" (cartItemsChange)="updateCart($event); search.updateCart($event)"></cart>

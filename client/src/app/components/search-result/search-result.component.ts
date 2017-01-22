@@ -32,7 +32,6 @@ export class SearchResultComponent {
     }
 
     updateCart(result : ResourceResult[]) {
-        console.log('search' + result);
         this.cartItems = result;
         this.cartItemsChange.emit(result);
     }

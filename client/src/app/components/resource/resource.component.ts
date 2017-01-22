@@ -1,5 +1,5 @@
 import { LabelService } from '../../services/label.service';
-import { Component, Input, Output, EventEmitter, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, Input, Output, EventEmitter, trigger, state, style, transition, animate, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResourceResult } from '../../domain/search-result.model';
 
@@ -21,12 +21,12 @@ import { ResourceResult } from '../../domain/search-result.model';
         ])
     ]
 })
-export class ResourceComponent {
+export class ResourceComponent implements DoCheck {
 
     @Input("resource") resource
 
-    @Input() cartItems: ResourceResult[];
-    @Output() cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
+    @Input("cartItems") cartItems: ResourceResult[];
+    @Output("cartItemsChange") cartItemsChange: EventEmitter<ResourceResult[]> = new EventEmitter<ResourceResult[]>();
 
     private cartState: string = "notInCart";
 
@@ -41,24 +41,34 @@ export class ResourceComponent {
         }
     }
 
+    ngDoCheck() {
+            let index = this.cartItems.indexOf(this.resource);
+
+            if (index < 0) {
+                this.cartState = "notInCart";
+            } else {
+                this.cartState = "inCart";
+            }
+
+
+    }
+
     addToCart() {
         this.cartState = "inCart";
-        if (!this.cartItems) {
-            this.cartItems = [];
-        }
+
         this.cartItems.push(this.resource);
         this.cartItemsChange.emit(this.cartItems);
-        console.log('resource' + this.cartItems);
     }
 
     removeFromCart() {
         this.cartState = "notInCart";
 
-        var array = [2, 5, 9];
         let index = this.cartItems.indexOf(this.resource);
 
         if (index > -1) {
             this.cartItems.splice(index, 1);
-        }   
+        }
+
+        this.cartItemsChange.emit(this.cartItems);
     }
 }
