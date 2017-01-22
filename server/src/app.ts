@@ -54,6 +54,9 @@ export class Server {
 
     private crawl() {
         let controller: CityData = new CityData();
-        controller.crawlData();
+        controller.crawlData("http://donnees.ville.montreal.qc.ca/api/3");
+        console.log("I just finished crawling the city of Montreal master Juliano!");
+       // controller.crawlData("https://www.donneesquebec.ca/recherche/fr/api/3");
+        console.log("I just finished crawling the province of Québec master Juliano!");
     }
 }
