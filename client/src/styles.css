@@ -192,3 +192,12 @@ code-viewer > div{
     width: 100%;
     text-align: center;
 }
+
+.pdf-container {
+    height: 800px;
+}
+
+#map {
+    width: 100%;
+    height: 800px;
+}

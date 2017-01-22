@@ -1,3 +1,5 @@
+import { document } from '@angular/platform-browser/src/facade/browser';
+import { ViewChild } from '@angular/core/src/metadata/di';
 import { DataService } from '../../../services/data.service';
 import {
     AfterViewInit,
@@ -9,15 +11,21 @@ import {
     Output,
     SimpleChanges
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { ResourceResult } from '../../../domain/search-result.model';
+
+declare var PDFObject: any;
+declare var google: any;
+declare var jQuery: any;
 
 @Component({
     selector: 'visualize-modal',
     templateUrl: './visualize-modal.template.html'
 })
 export class VisualizeModalComponent implements DoCheck {
+    @ViewChild("map") map;
     @Input("resource") resource: ResourceResult;
 
     @Input("open") open: boolean;
@@ -28,7 +36,7 @@ export class VisualizeModalComponent implements DoCheck {
     private resourceContent;
     private lastResource;
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService, private sanitizer: DomSanitizer) {
     }
 
     async ngDoCheck() {
@@ -48,8 +56,22 @@ export class VisualizeModalComponent implements DoCheck {
                         this.loading = false;
                         console.log(err);
                     });
-                } else if(this.resource.format == "pdf"){
+                } else if (this.resource.format == "pdf") {
+                    this.resourceContent = this.sanitizer.bypassSecurityTrustResourceUrl(this.resource.url);
+                    this.lastResource = this.resource;
                     this.loading = false;
+                } else if (this.resource.format == "geojson") {
+                    this.lastResource = this.resource;
+                    this.loading = false;
+                    var myLatlng = new google.maps.LatLng(45.445151, -73.645651);
+                    var mapOptions = {
+                        zoom: 10,
+                        center: myLatlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(this.map.nativeElement,
+                        mapOptions);
+                    map.data.loadGeoJson(this.resource.url);
                 }
             }
         }

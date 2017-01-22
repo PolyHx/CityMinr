@@ -59,16 +59,24 @@ module Controller {
                                 let tmp = await resRepo.findOne({ id: resource.id });
                                 if (!tmp) {
                                     if (resource.format) {
-                                        let res = await resRepo.create(<IResourceModel>{
-                                            id: resource.id,
-                                            description: resource.description,
-                                            name: resource.name,
-                                            format: resource.format,
-                                            url: resource.url,
-                                            size: resource.size
+                                        let isValid = true;
+                                        let respo = await request.get(resource.url, (err, res) => {
+                                            if (err) {
+                                                isValid = false;
+                                            }
                                         });
-                                        packtemp.resources.push(res);
-                                        packtemp.save();
+                                        if (isValid) {
+                                            let res = await resRepo.create(<IResourceModel>{
+                                                id: resource.id,
+                                                description: resource.description,
+                                                name: resource.name,
+                                                format: resource.format,
+                                                url: resource.url,
+                                                size: resource.size
+                                            });
+                                            packtemp.resources.push(res);
+                                            packtemp.save();
+                                        }
                                     }
                                 }
                             }
