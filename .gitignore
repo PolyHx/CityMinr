@@ -1,9 +1,10 @@
-.vscode/
-
 # Logs
 logs
 *.log
 npm-debug.log*
+build
+.tscache
+tscommand*
 
 # Runtime data
 pids
@@ -37,3 +38,6 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# IDE stuff
+.idea
